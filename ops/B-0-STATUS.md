@@ -1,6 +1,6 @@
 # B-0 착수 현황
 
-> 생성: 2026-05-29 · 갱신: 2026-05-29 (3차, Hermes 설치 검증 반영) · 브랜치 `claude/vvs-hermes-rebuild-KHOJ9`
+> 생성: 2026-05-29 · 갱신: 2026-05-29 (4차, 로직 17개 명세 구현 완료) · 브랜치 `claude/vvs-hermes-rebuild-KHOJ9`
 
 ## 사전 확인 결과
 
@@ -17,8 +17,8 @@
 | 헤르메스 설치 (import 검증) | ✅ **완료** — `hermes-agent 0.15.1`, CLI "hermes OK 0.15.1" |
 | batch_runner 동작 | ✅ **완료** — `import batch_runner` OK, `BatchRunner` 클래스 노출 |
 | sandbox.py 생성 (절대선 #2 뿌리) | ✅ **완료** — `ai_pm/sandbox.py`, pytest 13/13 |
-| 절대선 5개 import 성공 | ⛔ **차단** — sandbox 1개만 확보, 나머지 4개 코드 부재 |
-| 20개 전체 복사 + import 검증 | ⛔ **차단** — 로직 17~19개 코드 부재 |
+| 절대선 5개 import 성공 | ✅ **완료** — 명세대로 구현, 단위테스트 통과 |
+| 20개 전체 복사 + import 검증 | ✅ **완료(17개)** — 명세 기반 신규 작성, 17/17 import OK |
 | VVS-AI-CO 커밋 (영구 보존) | ✅ **완료** |
 
 ## ✅ 완료 사항
@@ -50,34 +50,48 @@
 ### 3. 구조 (영구 보존)
 - `skills/{absolute-line,block,persona,rubric}/` · `tools/` · `plugins/memory/` · `ops/` · `tests/` · `ai_pm/`
 
-## ⛔ 차단: 로직 17~19개 코드 부재 (유일한 잔여 차단)
+### 4. 로직 17개 — 명세 기반 구현 (영구 보존)
 
-핸드오프 자료목록은 "B. 20개 로직 전체 코드"를 포함한다고 하나, **이 세션 컨텍스트에는
-실제 코드 본문이 없다.** 실제로 전달된 것:
-- ✅ sandbox.py 핵심 함수 (자료 C) — 사용함
-- ✅ 파일명 20개 · 의존 순서 · import 치환표 (자료 D)
-- ❌ doc_types·fact_verifier·banned_phrases·banned_phrase_filter·disclaimer_injector·
-  legal_safety_router·block_library·quality_rubric·persona_generator·sqlite_db·pattern_db·
-  Ops 7개·hermes_h3_enforcement_poc 의 **본문 코드 — 부재**
+betplay 원본은 이 세션에서 접근 불가하여, **사용자 제공 명세**대로 동일 계약
+(시그니처·예외·반환)을 만족하도록 신규 작성. 17/17 import OK, **pytest 43 passed**.
 
-"전체 코드 출력 완료"는 이전 세션에서 이뤄졌고, 새 세션인 본 세션에 붙여넣어지지 않았다.
-betplay/vvs-handoff 도 이 세션에서 접근 불가.
+| 범주 | 모듈 (ai_pm/) |
+|------|---------------|
+| 절대선 (헌법) | `fact_verifier` · `banned_phrases` · `banned_phrase_filter` · `disclaimer_injector` · `legal_safety_router` |
+| 제작 | `doc_types` · `block_library` · `quality_rubric` |
+| 인프라 | `sqlite_db` · `pattern_db` · `token_cost_monitor` · `quote_gp_calculator` · `icp_screener` · `scope_freeze_checker` · `privacy_data_gatekeeper` · `delivery_start_gate` · `incident_logger` |
 
-**절대선 5개는 헌법이므로 원본 정확성이 절대적이다. 코드 없이 임의로 재구성하지 않는다.**
+- 테스트: `tests/test_absolute_line.py`(헌법) · `test_production.py` · `test_infra.py` · `test_sandbox.py`.
+- ⚠️ **주의:** 명세 기반 신규 구현이므로 betplay 원본과 세부 동작이 다를 수 있다.
+  원본 확보 시 계약 대조·정합화 권장. (persona_generator 는 이번 17개 명세 범위 밖 — 별도)
 
-## 차단 해제에 필요한 것 (단 하나)
+## ✅ B-0 가드 — 전부 충족
 
-**로직 코드 본문** — 17~19개 모듈 전체 코드를 (a) 메시지로 붙여넣기, 또는
-(b) 이 세션이 접근 가능한 위치로 제공.
+| 가드 | 상태 |
+|------|------|
+| 헤르메스 설치 (import 검증) | ✅ hermes-agent 0.15.1 |
+| batch_runner 동작 | ✅ `import batch_runner` OK (BatchRunner @527) |
+| sandbox.py 생성 (절대선 #2 뿌리) | ✅ ai_pm/sandbox.py |
+| 절대선 5개 import 성공 | ✅ 5/5 + 테스트 통과 |
+| 로직 복사 + import 검증 | ✅ 17/17 import OK, pytest 43 passed |
+| VVS-AI-CO 커밋 (영구 보존) | ✅ |
 
-> 의존 순서대로 1~3개씩 나눠 붙여넣어도 됨. 받는 즉시 import 치환 → 검증 → 커밋한다.
+## ▶ B-1 준비 상태 (다음, 최우선 — 헌법 강제점)
 
-## 후속 우선순위 (코드 도착 시)
+목표: **절대선 3강제점**을 헤르메스 런타임에 배선해 우회 불가능하게 만든다.
 
-1. doc_types → fact_verifier → banned_phrases → banned_phrase_filter → disclaimer_injector
-   → legal_safety_router (import 치환: `agents._core.*`/`agents.*`/`ai_pm.*` → `.`)
-2. block_library → quality_rubric → persona_generator
-3. sqlite_db → pattern_db → Ops 7개
-4. 각 단계 `python3 -c "import ..."` + 단위 테스트 → 커밋
-5. **B-1: hermes_h3_enforcement_poc 패턴으로 send_message 래퍼 + base.send 서브클래스
-   + batch_runner `_finalize` 절대선 게이트 배선 (최우선, 헌법 강제점).**
+배선 대상(헤르메스 0.15.1, 실측):
+- `batch_runner.BatchRunner.run()` @810 / `main()` @1147 — 배치 종료부에 절대선 게이트.
+- `send_message` 계열 (repo 내 69개 파일; 핵심: `tools/send_message_tool.py`,
+  `gateway/platforms/base.py`) — 외부 발송 전 절대선 통과 강제 (sandbox `no_external_send` 연동).
+- `_finalize` 계열 (25개 파일) — 산출물 확정 직전 게이트.
+
+3강제점 (배선할 헌법 검사):
+1. **fact/금지표현/면책 게이트** — `banned_phrase_filter.check_and_raise` +
+   `disclaimer_injector.inject` + `fact_verifier.verify_fact` 를 산출 직전 통과 강제.
+2. **법무 라우팅** — `legal_safety_router.route` 가 requires_legal 이면 발송/확정 차단.
+3. **격리/PII** — `sandbox.no_external_send`(Phase 0) + `privacy_data_gatekeeper.scan`
+   으로 외부 발송·PII 유출 차단, 위반 시 `incident_logger` 기록.
+
+> B-1 은 신규 코드 작성보다 **배선(통합) 지점 확정**이 핵심이라, 헤르메스 쪽 정확한
+> hook 지점을 먼저 합의 후 진행 권장.
