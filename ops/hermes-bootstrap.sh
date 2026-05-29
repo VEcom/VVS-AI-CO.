@@ -28,7 +28,22 @@ git -C "${DEST}" checkout -q "${HERMES_PIN}"
 cd "${DEST}"
 bash scripts/install.sh
 
-# install.sh 는 venv 를 ${DEST}/venv 에 만든다 (.venv 아님).
-echo "[bootstrap] done — venv: ${DEST}/venv"
-echo "[bootstrap] verify: (cd ${DEST} && venv/bin/python -c 'import batch_runner; print(\"batch_runner OK\")')"
-( cd "${DEST}" && venv/bin/python -c "import batch_runner; print('[bootstrap] batch_runner import OK')" )
+# install.sh 의 설치 위치(venv)는 레이아웃에 따라 다르다:
+#   - 비루트(기본):  ${DEST}/venv
+#   - 루트(리눅스 FHS): /usr/local/lib/hermes-agent/venv  (이때 코드/venv가 거기로 감)
+# 두 후보를 모두 확인해 실제 venv python 을 찾는다.
+VPY=""
+for cand in "${DEST}/venv/bin/python" "/usr/local/lib/hermes-agent/venv/bin/python"; do
+  if [ -x "$cand" ]; then VPY="$cand"; break; fi
+done
+
+if [ -z "$VPY" ]; then
+  echo "[bootstrap] WARN: venv python 을 못 찾음 — hermes --version 으로만 확인" >&2
+  hermes --version || true
+  exit 0
+fi
+
+echo "[bootstrap] venv python: ${VPY}"
+# batch_runner 는 최상위 모듈이므로 설치 디렉터리에서 import 검증한다.
+( cd "$(dirname "$(dirname "$(dirname "$VPY")")")" \
+    && "$VPY" -c "import batch_runner; print('[bootstrap] batch_runner import OK ('+batch_runner.__file__+')')" )

@@ -27,13 +27,18 @@
 - `git clone https://github.com/NousResearch/hermes-agent` → **4189 파일, clone 성공**.
 - 핀: `689ef5e233980f5d5a32080e959f44c8991dd03a` (기본 브랜치 main), 버전 **hermes-agent 0.15.1**.
 - `bash scripts/install.sh` (uv venv 격리 + editable 설치 + 스모크) → **RC=0 성공**.
-  - venv: `/home/user/hermes-agent/venv` (주의: `.venv` 아님).
-  - CLI 스모크: `hermes` → **`hermes OK 0.15.1`**, `importlib.metadata.version('hermes-agent')` = **0.15.1**.
-  - **batch_runner 검증:** `venv/bin/python -c "import batch_runner"` → **OK**
-    (`/home/user/hermes-agent/batch_runner.py`, 1099줄, `BatchRunner` 클래스 노출).
+  - 루트 설치라 FHS 레이아웃 적용: 코드/venv 가 `/usr/local/lib/hermes-agent` 로 감
+    (`hermes --version` → `Project: /usr/local/lib/hermes-agent`). venv python:
+    `/usr/local/lib/hermes-agent/venv/bin/python`.
+  - CLI 스모크: `hermes --version` → **`Hermes Agent v0.15.1`**,
+    `importlib.metadata.version('hermes-agent')` = **0.15.1**.
+  - **batch_runner 검증(실측):** `venv/bin/python -c "import batch_runner"` → **OK**
+    (`FILE=/usr/local/lib/hermes-agent/batch_runner.py`, 1321줄, `BatchRunner` 클래스 @527 노출).
     ※ `batch_runner`는 pyproject `py-modules`의 **최상위 모듈** — `hermes.batch` 아님.
-- **B-1 배선 대상 실재 확인:** repo 내 `send_message` 18개 파일 · `_finalize` 10개 파일.
-  (정확한 배선 지점은 B-1에서 확정)
+- **B-1 배선 대상 실재 확인:** repo 내 `send_message` 69개 파일 · `_finalize` 25개 파일.
+  `batch_runner.BatchRunner.run()` @810 / `main()` @1147. (정확한 배선 지점은 B-1에서 확정)
+- **부트스트랩 정정:** `ops/hermes-bootstrap.sh` 가 비루트(`$DEST/venv`)·루트
+  (`/usr/local/lib/hermes-agent/venv`) 두 레이아웃 모두에서 venv 를 탐지하도록 수정.
 - **영구 보존 방식:** 거대 트리(4189파일)를 벤더링하지 않고 `ops/hermes-bootstrap.sh`로
   핀 고정 clone+`install.sh` 재현 가능하게 보존. (설치물 venv는 ephemeral 컨테이너 한정)
 
