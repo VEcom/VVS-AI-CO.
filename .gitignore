@@ -1,0 +1,12 @@
+# 로컬 전용 (세션별 권한 등)
+.claude/settings.local.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# OS
+.DS_Store
