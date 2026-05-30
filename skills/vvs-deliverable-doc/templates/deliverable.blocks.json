@@ -1,0 +1,7 @@
+{
+  "levels": {
+    "L1": {"doc_type": "회사소개서", "blocks": ["header", "company_intro", "footer"]},
+    "L2": {"doc_type": "기술문서", "blocks": ["header", "company_intro", "terms", "footer"]},
+    "L4": {"doc_type": "회사소개서", "blocks": ["header", "company_intro", "footer"]}
+  }
+}
