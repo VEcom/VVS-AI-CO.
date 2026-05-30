@@ -30,17 +30,12 @@ def level_config(level: str) -> dict:
 
 
 def build_blocks(data: dict, level: str) -> tuple[list, str]:
-    """입력 데이터 → (블록 스펙, doc_type). 레벨 템플릿 순서를 따른다."""
+    """입력 데이터 → (블록 스펙, doc_type).
+
+    원청 제출 수준 회사소개서(8섹션, 표 포함)를 위해 동적 'profile' 블록을
+    사용한다. data 는 sample_data.SAMPLE_COMPANY_L1 구조(또는 실데이터).
+    """
     data = data or {}
     cfg = level_config(level)
-    field_map = {
-        "header": {"title": data.get("title", "VVS 산출물"), "date": data.get("date", "")},
-        "company_intro": {
-            "company": data.get("company", ""),
-            "summary": data.get("summary", ""),
-        },
-        "terms": {"terms": data.get("terms", "")},
-        "footer": {"contact": data.get("contact", "")},
-    }
-    blocks = [(bid, field_map.get(bid, {})) for bid in cfg["blocks"]]
+    blocks = [("profile", {"_company": data, "_level": level})]
     return blocks, cfg["doc_type"]

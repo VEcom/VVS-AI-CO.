@@ -41,6 +41,26 @@ BLOCKS: dict[str, dict] = {
 }
 
 
+def _render_profile(data: dict) -> str:
+    """회사소개서 본문(8섹션, 표 포함) 동적 블록.
+
+    data = {"_company": <회사 dict>, "_level": "L1"|"L2"|"L4"}
+    """
+    from .profile_blocks import build_profile
+
+    company = data.get("_company", data)
+    level = data.get("_level", "L1")
+    return build_profile(company, level)
+
+
+# 함수형(동적) 블록 — 표/가변 행 등 template.format 으로 표현 불가한 구조용.
+BLOCKS["profile"] = {
+    "id": "profile",
+    "fields": [],
+    "render": _render_profile,
+}
+
+
 def get_block(block_id: str) -> dict:
     """블록 정의를 반환. 없으면 UnknownBlockError."""
     try:
@@ -50,8 +70,14 @@ def get_block(block_id: str) -> dict:
 
 
 def render_block(block_id: str, data: dict) -> str:
-    """블록을 데이터로 렌더링한다. 누락 필드는 빈 문자열로 채운다."""
+    """블록을 데이터로 렌더링한다.
+
+    블록에 'render' 콜러블이 있으면 그것으로(동적 블록), 없으면 'template' 을
+    str.format 으로 렌더한다(정적 블록). 누락 필드는 빈 문자열로 채운다.
+    """
     block = get_block(block_id)
     data = data or {}
+    if "render" in block:
+        return block["render"](data)
     safe = {field: data.get(field, "") for field in block["fields"]}
     return block["template"].format(**safe)

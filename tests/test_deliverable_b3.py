@@ -20,6 +20,7 @@ sys.path.insert(0, str(_REPO))
 from ai_pm import document_renderer as dr  # noqa: E402
 from ai_pm.disclaimer_injector import REQUIRED_DISCLAIMER  # noqa: E402
 from ai_pm.document_pipeline import render_and_deliver_document  # noqa: E402
+from ai_pm.sample_data import sample_company  # noqa: E402
 from ai_pm.sandbox import SYNTHETIC_MARK  # noqa: E402
 from ai_pm.vision_review import DESIGN_RUBRIC, review_design  # noqa: E402
 
@@ -54,15 +55,12 @@ class DocSpy:
         return {"as_document": path, **meta}
 
 
+from ai_pm.sample_data import sample_company  # noqa: E402
+
+
 def _clean_data(**over):
-    data = {
-        "title": "VVS 협력사 안내",
-        "date": "2026-05-30",
-        "company": "VVS",
-        "summary": "반도체 분야 협력사입니다. 주요 공정을 지원합니다.",
-        "terms": "표준 거래 조건을 따릅니다.",
-        "contact": "contact@example.com",
-    }
+    """원청 제출 수준 합성 회사 데이터(8섹션). 위반 주입은 over 로."""
+    data = sample_company("L1")
     data.update(over)
     return data
 
@@ -134,7 +132,7 @@ def test_all_levels_formats_block_on_violation(tmp_path):
         for builder in (BUILD_PPTX, BUILD_PDF):
             spy = DocSpy()
             res = builder.run(
-                _clean_data(summary="확실히 100% 보장 무조건"),
+                _clean_data(company="확실히 100% 보장 무조건"),
                 spy, level=level, out_dir=str(tmp_path),
             )
             assert res.real_fn_called is False
@@ -221,6 +219,9 @@ def test_design_review_vision_fn_failure_graceful(tmp_path):
 # 6) split_sections 단위 (렌더 입력 분해)
 # ════════════════════════════════════════════════════════════════════
 def test_split_sections_basic():
-    secs = dr.split_sections("# 제목\n본문1\n## 소제목\n본문2")
+    # 새 파서: '# 제목'은 표지 타이틀, '##'는 섹션 heading.
+    secs = dr.split_sections("# 표지\n## 소제목1\n본문1\n## 소제목2\n본문2")
     heads = [h for h, _ in secs]
-    assert "제목" in heads and "소제목" in heads
+    assert "소제목1" in heads and "소제목2" in heads
+    bodies = {h: b for h, b in secs}
+    assert "본문1" in bodies["소제목1"] and "본문2" in bodies["소제목2"]
