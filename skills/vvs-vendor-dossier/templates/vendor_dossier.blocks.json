@@ -1,0 +1,4 @@
+{
+  "doc_type": "기술문서",
+  "blocks": ["header", "company_intro", "terms", "footer"]
+}

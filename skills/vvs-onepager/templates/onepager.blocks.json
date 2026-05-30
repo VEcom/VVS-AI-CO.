@@ -1,0 +1,4 @@
+{
+  "doc_type": "회사소개서",
+  "blocks": ["header", "company_intro", "footer"]
+}
