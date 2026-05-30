@@ -8,6 +8,7 @@
 python-pptx>=1.0,<2.0   # PPTX 렌더
 reportlab>=4.0,<5.0     # PDF 렌더
 Pillow>=10.0            # 썸네일/비전 검수용 이미지 처리
+cairosvg>=2.7           # B-4 SVG→PNG (디자인 고도화·증빙, 확산모델 X)
 
 # 비전 디자인 검수(B-3 점수 산출)는 결정론 휴리스틱으로 동작하며,
 # 실제 vision_analyze 연결은 헤르메스 tools/vision_tools.py 를 사용한다(B-4).
