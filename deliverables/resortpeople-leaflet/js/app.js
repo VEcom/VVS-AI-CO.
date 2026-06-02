@@ -23,8 +23,10 @@
   function getUTM() { try { return JSON.parse(localStorage.getItem("rp_utm") || "{}"); } catch (e) { return {}; } }
 
   // ── 지점 선택 (?branch=ID, 없으면 첫 지점) ──
+  // file:// 에서도 동작하도록 reload 대신 메모리 오버라이드 + 재렌더 사용.
+  var selectedBranchId = null;
   function currentBranch() {
-    var id = new URLSearchParams(location.search).get("branch");
+    var id = selectedBranchId || new URLSearchParams(location.search).get("branch");
     return D.branches.find(function (b) { return b.id === id; }) || D.branches[0];
   }
 
@@ -149,8 +151,14 @@
   // ── 이벤트 바인딩 ──
   function bind(b) {
     document.getElementById("branchPick").addEventListener("change", function (e) {
-      var p = new URLSearchParams(location.search); p.set("branch", e.target.value);
-      location.search = p.toString();
+      selectedBranchId = e.target.value;
+      // http(s) 에서는 URL 도 갱신(공유 링크 유지). file:// 에서는 무시되어도 무방.
+      try {
+        var p = new URLSearchParams(location.search); p.set("branch", selectedBranchId);
+        history.replaceState(null, "", location.pathname + "?" + p.toString());
+      } catch (err) {}
+      render();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
     document.getElementById("ctaReserve").addEventListener("click", scrollToLead);
     document.getElementById("ctaShare").addEventListener("click", function () { shareLink(b); });
