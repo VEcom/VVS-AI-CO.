@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>리조트피플 관리자 (컨셉 데모)</title>
+  <style>
+    :root{--orange:#FF5A1F;--navy:#1A2233;--line:#CED4DE;--gray:#555A66;--paper:#FBFAF7}
+    *{box-sizing:border-box;margin:0;padding:0;font-family:"Pretendard","Noto Sans KR",system-ui,sans-serif}
+    body{background:#0e1118;color:#232A36}
+    .wrap{max-width:920px;margin:0 auto;background:var(--paper);min-height:100vh;padding:0 0 40px}
+    header{background:var(--navy);color:#fff;padding:16px 22px;display:flex;justify-content:space-between;align-items:center}
+    header b{color:var(--orange)}
+    .role{font-size:13px;background:rgba(255,255,255,.14);padding:6px 12px;border-radius:999px}
+    .toolbar{display:flex;gap:10px;align-items:center;padding:16px 22px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+    select,button{font-size:14px;padding:9px 14px;border-radius:9px;border:1px solid var(--line);background:#fff;cursor:pointer}
+    button.primary{background:var(--orange);color:#fff;border:0;font-weight:700}
+    .note{font-size:12.5px;color:var(--gray);padding:10px 22px;background:#FFF3EC;border-bottom:1px solid var(--line)}
+    .grid{padding:18px 22px;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+    .stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
+    .stat .n{font-size:26px;font-weight:800;color:var(--orange)}
+    .stat .l{font-size:12.5px;color:var(--gray);margin-top:3px}
+    table{width:100%;border-collapse:collapse;font-size:13.5px;margin:0 22px;width:calc(100% - 44px)}
+    th,td{padding:11px 10px;text-align:left;border-bottom:1px solid var(--line)}
+    th{background:#fff;color:var(--navy);font-weight:700;position:sticky;top:0}
+    tr:nth-child(even) td{background:#fff}
+    .empty{padding:40px 22px;text-align:center;color:var(--gray)}
+    .perm{font-size:11.5px;color:#fff;background:var(--navy);border-radius:6px;padding:2px 7px;margin-left:6px}
+    .hq-only{display:inline-block}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div><b>RESORT</b> PEOPLE · 관리자</div>
+      <div class="role" id="roleLabel">권한: —</div>
+    </header>
+
+    <div class="note" id="permNote"></div>
+
+    <div class="toolbar">
+      <label>권한&nbsp;
+        <select id="roleSel">
+          <option value="hq">본사 (전체 편집·전 지점)</option>
+          <option value="branch">지점 (자사 리드 조회만)</option>
+        </select>
+      </label>
+      <label>지점&nbsp;<select id="branchSel"></select></label>
+      <button id="refresh">새로고침</button>
+      <button class="primary hq-only" id="editBtn">콘텐츠 편집</button>
+      <button id="exportBtn">CSV 내보내기</button>
+    </div>
+
+    <div class="grid" id="stats"></div>
+    <table id="leadTable"><thead></thead><tbody></tbody></table>
+    <div class="empty" id="empty" style="display:none">수집된 리드가 없습니다. <br>프로토타입 랜딩(index.html)에서 사전예약을 신청하면 여기에 표시됩니다.</div>
+  </div>
+  <script src="js/data.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+/* style.css — 리조트피플 모바일 리플렛 (VVS Design System 15.2 · Burning Orange) */
+:root{
+  --orange:#FF5A1F; --orange-deep:#D94510; --navy:#1A2233; --ink:#232A36;
+  --gray:#555A66; --gray-light:#E9ECF1; --paper:#FBFAF7; --line:#CED4DE;
+  --radius:16px; --shadow:0 6px 24px rgba(26,34,51,.10);
+  --maxw:480px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Pretendard","Noto Sans KR","NanumGothic",-apple-system,system-ui,sans-serif;
+  color:var(--ink); background:#0e1118; line-height:1.55; letter-spacing:.1px;
+}
+.app{max-width:var(--maxw);margin:0 auto;background:var(--paper);min-height:100vh;position:relative;overflow:hidden}
+img{max-width:100%}
+a{color:inherit}
+
+/* ── 상단 바 ── */
+.topbar{
+  position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;background:rgba(251,250,247,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+}
+.topbar .logo{font-weight:800;letter-spacing:1px}
+.topbar .logo b{color:var(--orange)}
+.branch-pick{
+  appearance:none;border:1px solid var(--line);background:#fff;border-radius:999px;
+  padding:7px 30px 7px 14px;font-size:13px;font-weight:700;color:var(--navy);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%231A2233' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;
+}
+
+/* ── 히어로 ── */
+.hero{position:relative;padding:40px 20px 34px;color:#fff;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.12)}
+.hero>*{position:relative;z-index:1}
+.badge{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);
+  padding:5px 12px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:14px}
+.badge.live{background:#1EC28B;border-color:#1EC28B}
+.hero h1{font-size:27px;line-height:1.25;font-weight:800;margin-bottom:10px}
+.hero .sig{font-size:14px;opacity:.95}
+.hero .open{margin-top:16px;font-size:13px;opacity:.9}
+.hero .open b{font-weight:800}
+
+/* ── 진행바(사회적 증거) ── */
+.milestone{background:#fff;margin:-18px 16px 0;border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;position:relative;z-index:5}
+.milestone .ml-label{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:9px}
+.bar{height:10px;border-radius:999px;background:var(--gray-light);overflow:hidden}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--orange),var(--orange-deep))}
+.milestone .ml-num{margin-top:7px;font-size:12px;color:var(--gray)}
+.milestone .ml-num b{color:var(--orange);font-weight:800}
+
+/* ── 섹션 ── */
+section{padding:30px 20px}
+.sec-h{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.sec-h .bar6{width:5px;height:20px;border-radius:3px;background:var(--orange)}
+.sec-h h2{font-size:19px;font-weight:800;color:var(--navy)}
+.lead-txt{color:var(--gray);font-size:14.5px}
+
+/* 콘텐츠 카드 */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+.card .ic{font-size:26px}
+.card h3{font-size:15px;margin:8px 0 4px;color:var(--navy)}
+.card p{font-size:12.5px;color:var(--gray)}
+
+/* 지점 소개 */
+.branch-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+.branch-box .row{display:flex;gap:10px;font-size:14px;padding:7px 0;border-bottom:1px dashed var(--line)}
+.branch-box .row:last-child{border-bottom:0}
+.branch-box .row .k{flex:0 0 64px;color:var(--orange);font-weight:700}
+.branch-box .row .v{color:var(--ink)}
+
+/* 트레이너 */
+.trainers{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+.trainers::-webkit-scrollbar{display:none}
+.tr{flex:0 0 130px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center}
+.tr .ava{width:58px;height:58px;border-radius:50%;background:var(--gray-light);display:grid;place-items:center;font-size:28px;margin:0 auto 8px}
+.tr .nm{font-weight:800;color:var(--navy)}
+.tr .ro{font-size:12px;color:var(--orange);font-weight:700;margin:2px 0}
+.tr .tg{font-size:11.5px;color:var(--gray)}
+
+/* 시간표 */
+.tt{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.tt th,.tt td{padding:10px 8px;text-align:center;border-bottom:1px solid var(--line)}
+.tt thead th{background:var(--navy);color:#fff;font-weight:700}
+.tt tbody tr:nth-child(even){background:var(--gray-light)}
+.tt .tm{font-weight:800;color:var(--orange)}
+
+/* 이벤트 */
+.event{background:linear-gradient(135deg,var(--navy),#2b3650);color:#fff;border-radius:16px;padding:20px}
+.event .tag{font-size:12px;background:var(--orange);display:inline-block;padding:4px 10px;border-radius:999px;font-weight:800}
+.event h3{font-size:18px;margin:10px 0 6px}
+.event p{font-size:13.5px;opacity:.92}
+.event .until{margin-top:10px;font-size:12px;opacity:.8}
+
+/* 인센티브 */
+.incentive{background:#FFF3EC;border:1px dashed var(--orange);border-radius:16px;padding:18px;text-align:center}
+.incentive .gift{font-size:30px}
+.incentive h3{color:var(--orange-deep);font-size:17px;margin:6px 0}
+.incentive .rw{font-weight:800;color:var(--navy);font-size:15px}
+.incentive .cond{font-size:12.5px;color:var(--gray);margin-top:6px}
+
+/* ── 리드 폼 ── */
+.lead{background:var(--navy);color:#fff;border-radius:18px 18px 0 0;margin-top:10px}
+.lead .sec-h h2{color:#fff}
+.lead .sec-h .bar6{background:var(--orange)}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
+.field input,.field select{width:100%;padding:13px 14px;border-radius:10px;border:1px solid #3a4458;background:#222b3c;color:#fff;font-size:15px}
+.field input::placeholder{color:#8a93a6}
+.consent{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;color:#cdd3df;margin-bottom:10px}
+.consent input{margin-top:3px}
+.consent a{color:var(--orange);text-decoration:underline}
+.privacy-note{font-size:11px;color:#8a93a6;margin:8px 0 16px;line-height:1.5}
+.btn{display:block;width:100%;border:0;border-radius:12px;padding:16px;font-size:16px;font-weight:800;cursor:pointer}
+.btn-primary{background:var(--orange);color:#fff}
+.btn-primary:active{background:var(--orange-deep)}
+.btn-ghost{background:transparent;border:1px solid #4a5468;color:#fff}
+.share-row{display:flex;gap:10px;margin-top:12px}
+.share-row .btn{flex:1;padding:13px;font-size:14px}
+.btn-share{background:#fff;color:var(--navy)}
+
+/* 완료 상태 */
+.done{text-align:center;padding:30px 6px}
+.done .chk{font-size:46px}
+.done h3{font-size:20px;margin:8px 0;color:#fff}
+.done p{font-size:14px;color:#cdd3df}
+
+/* 플로팅 CTA */
+.cta-bar{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:var(--maxw);
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(251,250,247,.96);
+  backdrop-filter:blur(8px);border-top:1px solid var(--line);z-index:50;display:flex;gap:10px}
+.cta-bar .btn{margin:0}
+.cta-bar .btn-primary{flex:2}
+.cta-bar .btn-share{flex:1;border:1px solid var(--line)}
+
+footer{padding:24px 20px 110px;text-align:center;color:var(--gray);font-size:11.5px}
+footer .fb{font-weight:800;color:var(--navy)}
+
+/* 토스트 */
+.toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);background:var(--navy);color:#fff;
+  padding:11px 18px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:60}
+.toast.on{opacity:1}

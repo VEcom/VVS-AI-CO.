@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover"/>
+<title>리조트피플 — 모바일 리플렛</title>
+<meta property="og:title" content="리조트피플 모바일 리플렛"/>
+<meta property="og:description" content="지금 사전예약하고 오픈 특가 + 네이버페이 혜택받기."/>
+<style>
+/* style.css — 리조트피플 모바일 리플렛 (VVS Design System 15.2 · Burning Orange) */
+:root{
+  --orange:#FF5A1F; --orange-deep:#D94510; --navy:#1A2233; --ink:#232A36;
+  --gray:#555A66; --gray-light:#E9ECF1; --paper:#FBFAF7; --line:#CED4DE;
+  --radius:16px; --shadow:0 6px 24px rgba(26,34,51,.10);
+  --maxw:480px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Pretendard","Noto Sans KR","NanumGothic",-apple-system,system-ui,sans-serif;
+  color:var(--ink); background:#0e1118; line-height:1.55; letter-spacing:.1px;
+}
+.app{max-width:var(--maxw);margin:0 auto;background:var(--paper);min-height:100vh;position:relative;overflow:hidden}
+img{max-width:100%}
+a{color:inherit}
+
+/* ── 상단 바 ── */
+.topbar{
+  position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;background:rgba(251,250,247,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+}
+.topbar .logo{font-weight:800;letter-spacing:1px}
+.topbar .logo b{color:var(--orange)}
+.branch-pick{
+  appearance:none;border:1px solid var(--line);background:#fff;border-radius:999px;
+  padding:7px 30px 7px 14px;font-size:13px;font-weight:700;color:var(--navy);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%231A2233' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;
+}
+
+/* ── 히어로 ── */
+.hero{position:relative;padding:40px 20px 34px;color:#fff;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.12)}
+.hero>*{position:relative;z-index:1}
+.badge{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);
+  padding:5px 12px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:14px}
+.badge.live{background:#1EC28B;border-color:#1EC28B}
+.hero h1{font-size:27px;line-height:1.25;font-weight:800;margin-bottom:10px}
+.hero .sig{font-size:14px;opacity:.95}
+.hero .open{margin-top:16px;font-size:13px;opacity:.9}
+.hero .open b{font-weight:800}
+
+/* ── 진행바(사회적 증거) ── */
+.milestone{background:#fff;margin:-18px 16px 0;border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;position:relative;z-index:5}
+.milestone .ml-label{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:9px}
+.bar{height:10px;border-radius:999px;background:var(--gray-light);overflow:hidden}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--orange),var(--orange-deep))}
+.milestone .ml-num{margin-top:7px;font-size:12px;color:var(--gray)}
+.milestone .ml-num b{color:var(--orange);font-weight:800}
+
+/* ── 섹션 ── */
+section{padding:30px 20px}
+.sec-h{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.sec-h .bar6{width:5px;height:20px;border-radius:3px;background:var(--orange)}
+.sec-h h2{font-size:19px;font-weight:800;color:var(--navy)}
+.lead-txt{color:var(--gray);font-size:14.5px}
+
+/* 콘텐츠 카드 */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+.card .ic{font-size:26px}
+.card h3{font-size:15px;margin:8px 0 4px;color:var(--navy)}
+.card p{font-size:12.5px;color:var(--gray)}
+
+/* 지점 소개 */
+.branch-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+.branch-box .row{display:flex;gap:10px;font-size:14px;padding:7px 0;border-bottom:1px dashed var(--line)}
+.branch-box .row:last-child{border-bottom:0}
+.branch-box .row .k{flex:0 0 64px;color:var(--orange);font-weight:700}
+.branch-box .row .v{color:var(--ink)}
+
+/* 트레이너 */
+.trainers{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+.trainers::-webkit-scrollbar{display:none}
+.tr{flex:0 0 130px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center}
+.tr .ava{width:58px;height:58px;border-radius:50%;background:var(--gray-light);display:grid;place-items:center;font-size:28px;margin:0 auto 8px}
+.tr .nm{font-weight:800;color:var(--navy)}
+.tr .ro{font-size:12px;color:var(--orange);font-weight:700;margin:2px 0}
+.tr .tg{font-size:11.5px;color:var(--gray)}
+
+/* 시간표 */
+.tt{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.tt th,.tt td{padding:10px 8px;text-align:center;border-bottom:1px solid var(--line)}
+.tt thead th{background:var(--navy);color:#fff;font-weight:700}
+.tt tbody tr:nth-child(even){background:var(--gray-light)}
+.tt .tm{font-weight:800;color:var(--orange)}
+
+/* 이벤트 */
+.event{background:linear-gradient(135deg,var(--navy),#2b3650);color:#fff;border-radius:16px;padding:20px}
+.event .tag{font-size:12px;background:var(--orange);display:inline-block;padding:4px 10px;border-radius:999px;font-weight:800}
+.event h3{font-size:18px;margin:10px 0 6px}
+.event p{font-size:13.5px;opacity:.92}
+.event .until{margin-top:10px;font-size:12px;opacity:.8}
+
+/* 인센티브 */
+.incentive{background:#FFF3EC;border:1px dashed var(--orange);border-radius:16px;padding:18px;text-align:center}
+.incentive .gift{font-size:30px}
+.incentive h3{color:var(--orange-deep);font-size:17px;margin:6px 0}
+.incentive .rw{font-weight:800;color:var(--navy);font-size:15px}
+.incentive .cond{font-size:12.5px;color:var(--gray);margin-top:6px}
+
+/* ── 리드 폼 ── */
+.lead{background:var(--navy);color:#fff;border-radius:18px 18px 0 0;margin-top:10px}
+.lead .sec-h h2{color:#fff}
+.lead .sec-h .bar6{background:var(--orange)}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
+.field input,.field select{width:100%;padding:13px 14px;border-radius:10px;border:1px solid #3a4458;background:#222b3c;color:#fff;font-size:15px}
+.field input::placeholder{color:#8a93a6}
+.consent{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;color:#cdd3df;margin-bottom:10px}
+.consent input{margin-top:3px}
+.consent a{color:var(--orange);text-decoration:underline}
+.privacy-note{font-size:11px;color:#8a93a6;margin:8px 0 16px;line-height:1.5}
+.btn{display:block;width:100%;border:0;border-radius:12px;padding:16px;font-size:16px;font-weight:800;cursor:pointer}
+.btn-primary{background:var(--orange);color:#fff}
+.btn-primary:active{background:var(--orange-deep)}
+.btn-ghost{background:transparent;border:1px solid #4a5468;color:#fff}
+.share-row{display:flex;gap:10px;margin-top:12px}
+.share-row .btn{flex:1;padding:13px;font-size:14px}
+.btn-share{background:#fff;color:var(--navy)}
+
+/* 완료 상태 */
+.done{text-align:center;padding:30px 6px}
+.done .chk{font-size:46px}
+.done h3{font-size:20px;margin:8px 0;color:#fff}
+.done p{font-size:14px;color:#cdd3df}
+
+/* 플로팅 CTA */
+.cta-bar{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:var(--maxw);
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(251,250,247,.96);
+  backdrop-filter:blur(8px);border-top:1px solid var(--line);z-index:50;display:flex;gap:10px}
+.cta-bar .btn{margin:0}
+.cta-bar .btn-primary{flex:2}
+.cta-bar .btn-share{flex:1;border:1px solid var(--line)}
+
+footer{padding:24px 20px 110px;text-align:center;color:var(--gray);font-size:11.5px}
+footer .fb{font-weight:800;color:var(--navy)}
+
+/* 토스트 */
+.toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);background:var(--navy);color:#fff;
+  padding:11px 18px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:60}
+.toast.on{opacity:1}
+
+</style></head>
+<body>
+<noscript><div style="background:#FFF3EC;color:#D94510;padding:12px;text-align:center;font:14px/1.5 system-ui">이 화면은 미리보기입니다. 지점 전환·신청 등 전체 기능은 Safari/Chrome 등 기본 브라우저에서 열면 동작합니다.</div></noscript>
+<div class="app" id="app"><header class="topbar">  <div class="logo"><b>RESORT</b> PEOPLE</div>  <select class="branch-pick" id="branchPick" aria-label="지점 선택"><option value="mapo" selected="">마포점</option><option value="gangnam">강남점</option><option value="songpa">송파점</option><option value="bundang">분당점</option><option value="ilsan">일산점</option><option value="incheon">인천점</option><option value="daejeon">대전점</option><option value="busan">부산점</option><option value="gwangju">광주점</option>  </select></header><div class="hero" style="background:linear-gradient(135deg,#1A2233,#FF5A1F)">  <span class="badge ">⏳ 사전예약</span>  <h1>마포에 압도적 웰니스 성지가 생깁니다</h1>  <div class="sig">디지털 카디오 라운지 + 펑셔널 존 국내 최대 규모</div>  <div class="open">🗓️ <b>2026-07-01</b> 오픈 예정 · 공덕역 2번 출구 도보 3분</div></div><div class="milestone">  <div class="ml-label">🔥 사전예약 50명 달성 시 평생회원가 고정</div>  <div class="bar"><i style="width:76%"></i></div>  <div class="ml-num"><b>38명</b> / 50명 달성 (76%)</div></div><section><div class="sec-h"><span class="bar6"></span><h2>브랜드 소개</h2></div><p class="lead-txt">리조트피플은 ‘운동’을 ‘휴양’의 경험으로 바꾸는 프리미엄 피트니스 &amp; 웰니스 브랜드입니다. 넓은 공간, 충분한 기구, 밀착 트레이닝, 그리고 지점마다 다른 시그니처 프로그램으로 당신의 하루에 리조트의 여유를 더합니다.</p></section><section><div class="sec-h"><span class="bar6"></span><h2>콘텐츠 · 프로그램</h2></div><div class="cards"><div class="card"><div class="ic">🏋️</div><h3>프리웨이트 존</h3><p>넉넉한 기구 수로 대기 없이, 원하는 무게는 마음껏.</p></div><div class="card"><div class="ic">🏃</div><h3>디지털 카디오</h3><p>기록을 측정하며 성장하는 몰입형 유산소 라운지.</p></div><div class="card"><div class="ic">🧘</div><h3>웰니스 스튜디오</h3><p>필라테스·요가·스트레칭 — 회복과 밸런스.</p></div><div class="card"><div class="ic">🤸</div><h3>펑셔널 존</h3><p>러닝·클라이밍·서킷에 대비한 기능성 트레이닝.</p></div></div></section><section><div class="sec-h"><span class="bar6"></span><h2>마포점 안내</h2></div><div class="branch-box"><div class="row"><span class="k">시그니처</span><span class="v">디지털 카디오 라운지 + 펑셔널 존 국내 최대 규모</span></div><div class="row"><span class="k">주소</span><span class="v">서울 마포구 마포대로 100, 리조트피플타워 3–5F</span></div><div class="row"><span class="k">교통</span><span class="v">공덕역 2번 출구 도보 3분</span></div><div class="row"><span class="k">오픈</span><span class="v">2026-07-01</span></div></div></section><section><div class="sec-h"><span class="bar6"></span><h2>강사 · 트레이너</h2></div><div class="trainers"><div class="tr"><div class="ava">💪</div><div class="nm">김도윤</div><div class="ro">퍼포먼스 코치</div><div class="tg">근력·체형교정</div></div><div class="tr"><div class="ava">🧘‍♀️</div><div class="nm">이서연</div><div class="ro">필라테스 마스터</div><div class="tg">재활·코어</div></div><div class="tr"><div class="ava">🏃‍♂️</div><div class="nm">박준호</div><div class="ro">러닝 디렉터</div><div class="tg">마라톤·심폐</div></div></div></section><section><div class="sec-h"><span class="bar6"></span><h2>주간 시간표</h2></div><table class="tt"><thead><tr><th>시간</th><th>월</th><th>수</th><th>금</th></tr></thead><tbody><tr><td class="tm">06:00</td><td>모닝버닝</td><td>모닝버닝</td><td>모닝버닝</td></tr><tr><td class="tm">12:00</td><td>런치필라테스</td><td>코어서킷</td><td>런치필라테스</td></tr><tr><td class="tm">19:00</td><td>그룹펑셔널</td><td>디지털러닝</td><td>그룹펑셔널</td></tr><tr><td class="tm">21:00</td><td>스트레칭&amp;회복</td><td>스트레칭&amp;회복</td><td>스트레칭&amp;회복</td></tr></tbody></table></section><section><div class="sec-h"><span class="bar6"></span><h2>이번 달 이벤트</h2></div><div class="event"><span class="tag">7월 오픈 캐치업 이벤트</span><h3>사전예약 고객 한정 — 12개월권 결제 시 PT 4회 + 인바디 무제한.</h3><div class="until">⏰ 2026-06-30 까지</div></div></section><section><div class="sec-h"><span class="bar6"></span><h2>사전등록 혜택</h2></div><div class="incentive"><div class="gift">🎁</div><h3>사전등록하면 오픈 특가 + 네이버페이</h3><div class="rw">네이버페이 상품권 1만원권</div><div class="cond">사전등록 후 오픈일 방문 상담 시 100% 지급<br>👥 친구에게 링크 공유 시, 친구 등록당 추가 5,000원권</div></div></section><section class="lead" id="leadSec">  <div class="sec-h"><span class="bar6"></span><h2>사전예약 신청</h2></div>  <div id="leadBody">    <div class="field"><label>이름</label><input id="f_name" placeholder="이름을 입력해주세요"></div>    <div class="field"><label>연락처</label><input id="f_phone" type="tel" inputmode="numeric" placeholder="010-0000-0000"></div>    <div class="field"><label>관심 프로그램</label><select id="f_prog"><option>프리웨이트 존</option><option>디지털 카디오</option><option>웰니스 스튜디오</option><option>펑셔널 존</option></select></div>    <div class="field"><label>유입 경로</label><select id="f_src"><option>인스타그램</option><option>지인 추천</option><option>전단·리플렛</option><option>네이버 검색</option><option>지나가다</option><option>기타</option></select></div>    <label class="consent"><input type="checkbox" id="f_agree"><span>개인정보 수집 및 이용에 동의합니다. <a href="#" id="privacyLink">[보기]</a></span></label>    <label class="consent"><input type="checkbox" id="f_mkt"><span>마케팅 정보 수신(오픈·이벤트 알림)에 동의합니다. (선택)</span></label>    <div class="privacy-note">· 수집 목적 : 지점 오픈세일 알림 및 서비스 이용 개시 안내<br>· 개인정보 보유 및 이용기간 : 3년</div>    <button class="btn btn-primary" id="submitLead">사전예약하고 혜택받기</button>    <div class="share-row"><button class="btn btn-share" id="shareLink">🔗 친구에게 링크 보내기</button></div>  </div></section><footer><div class="fb">리조트피플 마포점</div>서울 마포구 마포대로 100, 리조트피플타워 3–5F<br>© 2026 RESORT PEOPLE. 본 페이지는 프로토타입입니다.</footer><div class="cta-bar">  <button class="btn btn-primary" id="ctaReserve">사전예약 신청</button>  <button class="btn btn-share" id="ctaShare">🔗 공유</button></div><div class="toast" id="toast"></div></div>
+<script>
+/*
+ * data.js — 리조트피플 모바일 리플렛 데이터 (프로토타입)
+ *
+ * 실서비스에서는 이 데이터가 MySQL + 관리자 페이지로 대체된다.
+ *  - BRAND  : 본사가 통제하는 공통 요소(브랜드 소개·콘텐츠 카테고리·디자인 토큰).
+ *  - BRANCHES : 9개 지점. 공통 구조는 동일하되 지점별 내용만 차별화.
+ *
+ * 관리자 권한 2단계 매핑:
+ *   - 본사 : BRAND 전체 + 모든 BRANCH 편집
+ *   - 지점 : 자사 BRANCH 의 leads 조회만 (편집 불가)  ← admin.html 데모에서 확인
+ */
+
+window.RP_DATA = {
+  brand: {
+    name: "리조트피플",
+    nameEn: "RESORT PEOPLE",
+    tagline: "도심 속 리조트, 매일이 휴양처럼",
+    intro:
+      "리조트피플은 ‘운동’을 ‘휴양’의 경험으로 바꾸는 프리미엄 피트니스 & 웰니스 브랜드입니다. " +
+      "넓은 공간, 충분한 기구, 밀착 트레이닝, 그리고 지점마다 다른 시그니처 프로그램으로 " +
+      "당신의 하루에 리조트의 여유를 더합니다.",
+    // 본사 공통 콘텐츠 카테고리 (모든 지점 동일 노출)
+    contents: [
+      { icon: "🏋️", title: "프리웨이트 존", desc: "넉넉한 기구 수로 대기 없이, 원하는 무게는 마음껏." },
+      { icon: "🏃", title: "디지털 카디오", desc: "기록을 측정하며 성장하는 몰입형 유산소 라운지." },
+      { icon: "🧘", title: "웰니스 스튜디오", desc: "필라테스·요가·스트레칭 — 회복과 밸런스." },
+      { icon: "🤸", title: "펑셔널 존", desc: "러닝·클라이밍·서킷에 대비한 기능성 트레이닝." },
+    ],
+    // 인센티브(리드 등록 보상) — 본사 정책, 지점 공통
+    incentive: {
+      headline: "사전등록하면 오픈 특가 + 네이버페이",
+      reward: "네이버페이 상품권 1만원권",
+      condition: "사전등록 후 오픈일 방문 상담 시 100% 지급",
+      referral: "친구에게 링크 공유 시, 친구 등록당 추가 5,000원권",
+    },
+    privacy: {
+      purpose: "지점 오픈세일 알림 및 서비스 이용 개시 안내",
+      retention: "개인정보 보유 및 이용기간 : 3년",
+    },
+  },
+
+  // ── 9개 지점 ──
+  branches: [
+    {
+      id: "mapo",
+      name: "마포점",
+      status: "사전예약",
+      headline: "마포에 압도적 웰니스 성지가 생깁니다",
+      openDate: "2026-07-01",
+      address: "서울 마포구 마포대로 100, 리조트피플타워 3–5F",
+      area: "공덕역 2번 출구 도보 3분",
+      hero: "linear-gradient(135deg,#1A2233,#FF5A1F)",
+      signature: "디지털 카디오 라운지 + 펑셔널 존 국내 최대 규모",
+      milestone: { label: "사전예약 50명 달성 시 평생회원가 고정", current: 38, target: 50 },
+      trainers: [
+        { name: "김도윤", role: "퍼포먼스 코치", tag: "근력·체형교정", img: "💪" },
+        { name: "이서연", role: "필라테스 마스터", tag: "재활·코어", img: "🧘‍♀️" },
+        { name: "박준호", role: "러닝 디렉터", tag: "마라톤·심폐", img: "🏃‍♂️" },
+      ],
+      schedule: [
+        { time: "06:00", mon: "모닝버닝", wed: "모닝버닝", fri: "모닝버닝" },
+        { time: "12:00", mon: "런치필라테스", wed: "코어서킷", fri: "런치필라테스" },
+        { time: "19:00", mon: "그룹펑셔널", wed: "디지털러닝", fri: "그룹펑셔널" },
+        { time: "21:00", mon: "스트레칭&회복", wed: "스트레칭&회복", fri: "스트레칭&회복" },
+      ],
+      event: {
+        title: "7월 오픈 캐치업 이벤트",
+        desc: "사전예약 고객 한정 — 12개월권 결제 시 PT 4회 + 인바디 무제한.",
+        until: "2026-06-30",
+      },
+    },
+    { id: "gangnam", name: "강남점", status: "운영중", headline: "강남 한복판, 리조트의 여유",
+      openDate: "운영중", address: "서울 강남구 테헤란로 152, 5F", area: "강남역 11번 출구 도보 5분",
+      hero: "linear-gradient(135deg,#1A2233,#D94510)", signature: "프리웨이트 존 2배 확장 + 사우나",
+      milestone: { label: "6월 재등록 회원 PT 2회 적립", current: 120, target: 150 },
+      trainers: [ { name:"정유진", role:"헤드 코치", tag:"다이어트·근비대", img:"🏋️‍♀️" }, { name:"최민석", role:"웨이트 코치", tag:"파워리프팅", img:"🏋️" } ],
+      schedule: [ {time:"07:00",mon:"모닝웨이트",wed:"모닝웨이트",fri:"모닝웨이트"}, {time:"18:30",mon:"그룹GX",wed:"스피닝",fri:"그룹GX"}, {time:"20:00",mon:"코어&스트레칭",wed:"코어&스트레칭",fri:"코어&스트레칭"} ],
+      event: { title:"6월 데일리 출석 챌린지", desc:"월 20회 출석 시 단백질 보충제 증정.", until:"2026-06-30" } },
+    { id: "songpa", name: "송파점", status: "운영중", headline: "송파 패밀리 웰니스 클럽",
+      openDate: "운영중", address: "서울 송파구 올림픽로 300, 2–3F", area: "잠실역 3번 출구 도보 4분",
+      hero: "linear-gradient(135deg,#1A2233,#FF7A3C)", signature: "키즈존 + 패밀리 라커",
+      milestone: { label: "가족 동반 등록 시 1인 무료", current: 64, target: 80 },
+      trainers: [ { name:"한지원", role:"키즈 PT", tag:"성장·체형", img:"🧒" }, { name:"오세훈", role:"재활 트레이너", tag:"통증·자세", img:"🩹" } ],
+      schedule: [ {time:"10:00",mon:"키즈짐",wed:"키즈짐",fri:"키즈짐"}, {time:"19:00",mon:"패밀리요가",wed:"코어서킷",fri:"패밀리요가"} ],
+      event: { title:"여름방학 키즈 패키지", desc:"키즈 8주 프로그램 + 체형분석 리포트.", until:"2026-07-15" } },
+    { id: "bundang", name: "분당점", status: "운영중", headline: "분당 직장인 회복 거점",
+      openDate: "운영중", address: "경기 성남시 분당구 황새울로 200, 4F", area: "서현역 1번 출구 도보 2분",
+      hero: "linear-gradient(135deg,#1A2233,#E85A2A)", signature: "런치 회복 프로그램 + 마사지건 라운지",
+      milestone: { label: "런치회원 전용 라커 무료", current: 90, target: 100 },
+      trainers: [ { name:"신예린", role:"회복 코치", tag:"스트레칭·이완", img:"💆‍♀️" } ],
+      schedule: [ {time:"12:00",mon:"런치필라테스",wed:"런치HIIT",fri:"런치필라테스"}, {time:"19:30",mon:"이브닝웨이트",wed:"이브닝웨이트",fri:"이브닝웨이트"} ],
+      event: { title:"런치 멤버십 30%", desc:"평일 11–14시 전용권 한정 특가.", until:"2026-06-30" } },
+    { id: "ilsan", name: "일산점", status: "운영중", headline: "일산 호수처럼 넓은 공간",
+      openDate: "운영중", address: "경기 고양시 일산동구 중앙로 1000, 3F", area: "정발산역 도보 6분",
+      hero: "linear-gradient(135deg,#1A2233,#C9420F)", signature: "대형 GX홀 + 스피닝 전용관",
+      milestone: { label: "GX 무제한권 런칭가", current: 45, target: 60 },
+      trainers: [ { name:"문가영", role:"GX 디렉터", tag:"줌바·스피닝", img:"💃" } ],
+      schedule: [ {time:"10:00",mon:"줌바",wed:"스피닝",fri:"줌바"}, {time:"20:00",mon:"바디펌프",wed:"코어",fri:"바디펌프"} ],
+      event: { title:"GX 무제한 얼리버드", desc:"선착순 60명 평생 할인가 고정.", until:"2026-07-10" } },
+    { id: "incheon", name: "인천점", status: "운영중", headline: "인천 베이프론트 피트니스",
+      openDate: "운영중", address: "인천 연수구 컨벤시아대로 50, 2F", area: "센트럴파크역 도보 3분",
+      hero: "linear-gradient(135deg,#1A2233,#FF5A1F)", signature: "오션뷰 카디오 라운지",
+      milestone: { label: "오션뷰 트레드밀 예약제", current: 30, target: 50 },
+      trainers: [ { name:"배성우", role:"카디오 코치", tag:"러닝·감량", img:"🏃" } ],
+      schedule: [ {time:"06:30",mon:"선라이즈런",wed:"선라이즈런",fri:"선라이즈런"}, {time:"19:00",mon:"펑셔널",wed:"펑셔널",fri:"펑셔널"} ],
+      event: { title:"오션뷰 오픈 기념", desc:"신규 6개월권 + 1개월 추가.", until:"2026-06-30" } },
+    { id: "daejeon", name: "대전점", status: "운영중", headline: "대전 과학의 도시, 데이터 트레이닝",
+      openDate: "운영중", address: "대전 유성구 대학로 99, 3F", area: "유성온천역 도보 5분",
+      hero: "linear-gradient(135deg,#1A2233,#D94510)", signature: "인바디 무제한 + 데이터 코칭",
+      milestone: { label: "데이터 PT 패키지 런칭", current: 22, target: 40 },
+      trainers: [ { name:"노지훈", role:"데이터 코치", tag:"체성분·기록", img:"📊" } ],
+      schedule: [ {time:"12:00",mon:"데이터HIIT",wed:"코어",fri:"데이터HIIT"}, {time:"19:00",mon:"웨이트",wed:"웨이트",fri:"웨이트"} ],
+      event: { title:"체성분 챌린지", desc:"8주 변화 1위 100만원 상당 상품.", until:"2026-07-31" } },
+    { id: "busan", name: "부산점", status: "사전예약", headline: "부산 해운대, 곧 오픈합니다",
+      openDate: "2026-08-01", address: "부산 해운대구 해운대로 200, 5F", area: "해운대역 도보 4분",
+      hero: "linear-gradient(135deg,#1A2233,#FF7A3C)", signature: "루프탑 요가 데크",
+      milestone: { label: "사전예약 평생회원가 고정", current: 18, target: 50 },
+      trainers: [ { name:"강하늘", role:"요가 마스터", tag:"빈야사·명상", img:"🧘" } ],
+      schedule: [ {time:"07:00",mon:"루프탑요가",wed:"루프탑요가",fri:"루프탑요가"}, {time:"19:00",mon:"펑셔널",wed:"카디오",fri:"펑셔널"} ],
+      event: { title:"8월 오픈 사전예약", desc:"선착순 50명 평생 최저가.", until:"2026-07-25" } },
+    { id: "gwangju", name: "광주점", status: "운영중", headline: "광주 도심 웰니스 허브",
+      openDate: "운영중", address: "광주 서구 상무중앙로 30, 4F", area: "상무역 도보 3분",
+      hero: "linear-gradient(135deg,#1A2233,#E85A2A)", signature: "24시간 무인 운영존",
+      milestone: { label: "심야회원 라커 무료", current: 55, target: 70 },
+      trainers: [ { name:"임재현", role:"24h 코치", tag:"자율운동·홈케어", img:"🌙" } ],
+      schedule: [ {time:"06:00",mon:"얼리버드",wed:"얼리버드",fri:"얼리버드"}, {time:"22:00",mon:"나이트핏",wed:"나이트핏",fri:"나이트핏"} ],
+      event: { title:"24시간 멤버십 오픈", desc:"심야 전용권 첫달 무료.", until:"2026-06-30" } },
+  ],
+};
+
+</script>
+<script>
+/*
+ * app.js — 리조트피플 모바일 리플렛 렌더링 + 리드 수집 + 링크공유 + UTM
+ *
+ * 프로토타입: 리드는 localStorage 에 저장(서버 연동 자리는 submitLead() 참고).
+ * 실서비스: submitLead() 가 POST /api/leads 로 전송, 지점은 ?branch=ID 로 라우팅.
+ */
+(function () {
+  "use strict";
+  var D = window.RP_DATA;
+
+  // ── UTM 캡처 (butfit 레퍼런스와 동일 전략) ──
+  (function captureUTM() {
+    var s = location.search;
+    if (s && s.indexOf("utm_") !== -1) {
+      var p = new URLSearchParams(s), u = {};
+      ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"].forEach(function (k) {
+        var v = p.get(k); if (v) u[k] = v;
+      });
+      if (Object.keys(u).length) { u._t = Date.now(); try { localStorage.setItem("rp_utm", JSON.stringify(u)); } catch (e) {} }
+    }
+  })();
+
+  function getUTM() { try { return JSON.parse(localStorage.getItem("rp_utm") || "{}"); } catch (e) { return {}; } }
+
+  // ── 지점 선택 (?branch=ID, 없으면 첫 지점) ──
+  // file:// 에서도 동작하도록 reload 대신 메모리 오버라이드 + 재렌더 사용.
+  var selectedBranchId = null;
+  function currentBranch() {
+    var id = selectedBranchId || new URLSearchParams(location.search).get("branch");
+    return D.branches.find(function (b) { return b.id === id; }) || D.branches[0];
+  }
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  function render() {
+    var b = currentBranch();
+    document.title = D.brand.name + " " + b.name + " — " + b.headline;
+    var live = b.status === "운영중";
+    var pct = Math.min(100, Math.round((b.milestone.current / b.milestone.target) * 100));
+
+    var app = document.getElementById("app");
+    app.innerHTML = [
+      // 상단 바 + 지점 선택
+      '<header class="topbar">',
+      '  <div class="logo"><b>RESORT</b> PEOPLE</div>',
+      '  <select class="branch-pick" id="branchPick" aria-label="지점 선택">',
+      D.branches.map(function (x) {
+        return '<option value="' + x.id + '"' + (x.id === b.id ? " selected" : "") + ">" + esc(x.name) + "</option>";
+      }).join(""),
+      '  </select>',
+      "</header>",
+
+      // 히어로
+      '<div class="hero" style="background:' + b.hero + '">',
+      '  <span class="badge ' + (live ? "live" : "") + '">' + (live ? "🟢 운영중" : "⏳ " + esc(b.status)) + "</span>",
+      "  <h1>" + esc(b.headline) + "</h1>",
+      '  <div class="sig">' + esc(b.signature) + "</div>",
+      '  <div class="open">' + (live ? "📍 " + esc(b.area) : "🗓️ <b>" + esc(b.openDate) + "</b> 오픈 예정 · " + esc(b.area)) + "</div>",
+      "</div>",
+
+      // 마일스톤
+      '<div class="milestone">',
+      '  <div class="ml-label">🔥 ' + esc(b.milestone.label) + "</div>",
+      '  <div class="bar"><i style="width:' + pct + '%"></i></div>',
+      '  <div class="ml-num"><b>' + b.milestone.current + "명</b> / " + b.milestone.target + "명 달성 (" + pct + "%)</div>",
+      "</div>",
+
+      // 브랜드 소개
+      sec("브랜드 소개", '<p class="lead-txt">' + esc(D.brand.intro) + "</p>"),
+
+      // 콘텐츠
+      sec("콘텐츠 · 프로그램",
+        '<div class="cards">' + D.brand.contents.map(function (c) {
+          return '<div class="card"><div class="ic">' + c.icon + "</div><h3>" + esc(c.title) + "</h3><p>" + esc(c.desc) + "</p></div>";
+        }).join("") + "</div>"),
+
+      // 지점 소개
+      sec(b.name + " 안내",
+        '<div class="branch-box">' +
+        row("시그니처", b.signature) + row("주소", b.address) + row("교통", b.area) +
+        row("오픈", live ? "운영중" : b.openDate) + "</div>"),
+
+      // 트레이너
+      sec("강사 · 트레이너",
+        '<div class="trainers">' + b.trainers.map(function (t) {
+          return '<div class="tr"><div class="ava">' + t.img + '</div><div class="nm">' + esc(t.name) +
+            '</div><div class="ro">' + esc(t.role) + '</div><div class="tg">' + esc(t.tag) + "</div></div>";
+        }).join("") + "</div>"),
+
+      // 시간표
+      sec("주간 시간표",
+        '<table class="tt"><thead><tr><th>시간</th><th>월</th><th>수</th><th>금</th></tr></thead><tbody>' +
+        b.schedule.map(function (r) {
+          return "<tr><td class='tm'>" + esc(r.time) + "</td><td>" + esc(r.mon || "-") + "</td><td>" + esc(r.wed || "-") + "</td><td>" + esc(r.fri || "-") + "</td></tr>";
+        }).join("") + "</tbody></table>"),
+
+      // 월간 이벤트
+      sec("이번 달 이벤트",
+        '<div class="event"><span class="tag">' + esc(b.event.title) + "</span><h3>" + esc(b.event.desc) +
+        '</h3><div class="until">⏰ ' + esc(b.event.until) + " 까지</div></div>"),
+
+      // 인센티브
+      sec("사전등록 혜택",
+        '<div class="incentive"><div class="gift">🎁</div><h3>' + esc(D.brand.incentive.headline) +
+        '</h3><div class="rw">' + esc(D.brand.incentive.reward) + '</div><div class="cond">' +
+        esc(D.brand.incentive.condition) + "<br>👥 " + esc(D.brand.incentive.referral) + "</div></div>"),
+
+      // 리드 폼
+      leadFormHTML(b),
+
+      // 푸터
+      '<footer><div class="fb">' + D.brand.name + " " + esc(b.name) + "</div>" +
+      esc(b.address) + "<br>© 2026 RESORT PEOPLE. 본 페이지는 프로토타입입니다.</footer>",
+
+      // 플로팅 CTA
+      '<div class="cta-bar">',
+      '  <button class="btn btn-primary" id="ctaReserve">' + (live ? "상담 신청하기" : "사전예약 신청") + "</button>",
+      '  <button class="btn btn-share" id="ctaShare">🔗 공유</button>',
+      "</div>",
+      '<div class="toast" id="toast"></div>',
+    ].join("");
+
+    bind(b);
+  }
+
+  function sec(title, inner) {
+    return '<section><div class="sec-h"><span class="bar6"></span><h2>' + esc(title) + "</h2></div>" + inner + "</section>";
+  }
+  function row(k, v) { return '<div class="row"><span class="k">' + esc(k) + '</span><span class="v">' + esc(v) + "</span></div>"; }
+
+  function leadFormHTML(b) {
+    var prog = D.brand.contents.map(function (c) { return '<option>' + esc(c.title) + "</option>"; }).join("");
+    return [
+      '<section class="lead" id="leadSec">',
+      '  <div class="sec-h"><span class="bar6"></span><h2>' + (b.status === "운영중" ? "상담 신청" : "사전예약 신청") + "</h2></div>",
+      '  <div id="leadBody">',
+      '    <div class="field"><label>이름</label><input id="f_name" placeholder="이름을 입력해주세요"></div>',
+      '    <div class="field"><label>연락처</label><input id="f_phone" type="tel" inputmode="numeric" placeholder="010-0000-0000"></div>',
+      '    <div class="field"><label>관심 프로그램</label><select id="f_prog">' + prog + "</select></div>",
+      '    <div class="field"><label>유입 경로</label><select id="f_src"><option>인스타그램</option><option>지인 추천</option><option>전단·리플렛</option><option>네이버 검색</option><option>지나가다</option><option>기타</option></select></div>',
+      '    <label class="consent"><input type="checkbox" id="f_agree"><span>개인정보 수집 및 이용에 동의합니다. <a href="#" id="privacyLink">[보기]</a></span></label>',
+      '    <label class="consent"><input type="checkbox" id="f_mkt"><span>마케팅 정보 수신(오픈·이벤트 알림)에 동의합니다. (선택)</span></label>',
+      '    <div class="privacy-note">· 수집 목적 : ' + esc(D.brand.privacy.purpose) + "<br>· " + esc(D.brand.privacy.retention) + "</div>",
+      '    <button class="btn btn-primary" id="submitLead">' + (b.status === "운영중" ? "상담 신청 완료하기" : "사전예약하고 혜택받기") + "</button>",
+      '    <div class="share-row"><button class="btn btn-share" id="shareLink">🔗 친구에게 링크 보내기</button></div>',
+      "  </div>",
+      "</section>",
+    ].join("");
+  }
+
+  // ── 이벤트 바인딩 ──
+  function bind(b) {
+    document.getElementById("branchPick").addEventListener("change", function (e) {
+      selectedBranchId = e.target.value;
+      // http(s) 에서는 URL 도 갱신(공유 링크 유지). file:// 에서는 무시되어도 무방.
+      try {
+        var p = new URLSearchParams(location.search); p.set("branch", selectedBranchId);
+        history.replaceState(null, "", location.pathname + "?" + p.toString());
+      } catch (err) {}
+      render();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    document.getElementById("ctaReserve").addEventListener("click", scrollToLead);
+    document.getElementById("ctaShare").addEventListener("click", function () { shareLink(b); });
+    document.getElementById("shareLink").addEventListener("click", function () { shareLink(b); });
+    document.getElementById("privacyLink").addEventListener("click", function (e) {
+      e.preventDefault();
+      alert("[개인정보 수집·이용 동의]\n\n· 수집 항목 : 이름, 연락처, 관심 프로그램\n· 수집 목적 : " +
+        D.brand.privacy.purpose + "\n· " + D.brand.privacy.retention + "\n· 동의 거부 시 사전예약/상담 신청이 제한됩니다.");
+    });
+    document.getElementById("submitLead").addEventListener("click", function () { submitLead(b); });
+  }
+
+  function scrollToLead() { document.getElementById("leadSec").scrollIntoView({ behavior: "smooth" }); }
+
+  function toast(msg) {
+    var t = document.getElementById("toast"); t.textContent = msg; t.classList.add("on");
+    clearTimeout(toast._t); toast._t = setTimeout(function () { t.classList.remove("on"); }, 2000);
+  }
+
+  function shareLink(b) {
+    var url = location.origin + location.pathname + "?branch=" + b.id;
+    var data = { title: D.brand.name + " " + b.name, text: b.headline, url: url };
+    if (navigator.share) { navigator.share(data).catch(function () {}); }
+    else if (navigator.clipboard) { navigator.clipboard.writeText(url).then(function () { toast("링크를 복사했습니다!"); }); }
+    else { prompt("아래 링크를 복사해 공유하세요", url); }
+  }
+
+  function submitLead(b) {
+    var name = val("f_name"), phone = val("f_phone");
+    if (!name) return toast("이름을 입력해주세요");
+    if (!/^01[0-9][- ]?\d{3,4}[- ]?\d{4}$/.test(phone.replace(/\s/g, ""))) return toast("연락처를 정확히 입력해주세요");
+    if (!document.getElementById("f_agree").checked) return toast("개인정보 수집에 동의해주세요");
+
+    var lead = {
+      branch_id: b.id, branch_name: b.name, name: name, phone: phone,
+      program: val("f_prog"), source: val("f_src"),
+      marketing_agree: document.getElementById("f_mkt").checked,
+      utm: getUTM(), created_at: new Date().toISOString(),
+    };
+
+    // ── 프로토타입: localStorage 저장. 실서비스에서는 아래 fetch 로 대체 ──
+    // fetch("/api/leads", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(lead)})
+    var leads = JSON.parse(localStorage.getItem("rp_leads") || "[]");
+    leads.push(lead); localStorage.setItem("rp_leads", JSON.stringify(leads));
+
+    document.getElementById("leadBody").innerHTML =
+      '<div class="done"><div class="chk">✅</div><h3>' + esc(name) + "님, 신청 완료!</h3>" +
+      "<p>" + esc(b.name) + " 오픈/상담 안내를 보내드릴게요.<br>" + esc(D.brand.incentive.reward) +
+      " 지급 대상입니다 🎁</p>" +
+      '<div class="share-row" style="margin-top:18px"><button class="btn btn-share" id="shareDone">🔗 친구 초대하고 추가 혜택받기</button></div></div>';
+    document.getElementById("shareDone").addEventListener("click", function () { shareLink(b); });
+    scrollToLead();
+  }
+
+  function val(id) { return (document.getElementById(id).value || "").trim(); }
+
+  document.addEventListener("DOMContentLoaded", render);
+})();
+
+</script>
+</body></html>
