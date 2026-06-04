@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACRYL — AI to AX. Realized. (Home v2)</title>
+<meta name="description" content="㈜아크릴 — GPU·NPU 컴퓨팅부터 모델 운영, 에이전트, 의료 AI까지. 검증된 기술로 완성하는 통합 AX 인프라.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+/* ============================ TOKENS ============================ */
+:root{
+  --brand-300:#8FB0FF;--brand-400:#6E97FF;--brand-500:#4D7CFF;--brand-600:#2E5BE6;
+  --cyan:#38E1D6;--violet:#9A6BFF;--green:#35D08A;
+  --g-brand:linear-gradient(135deg,#4D7CFF 0%,#9A6BFF 55%,#38E1D6 100%);
+  --bg:#05060A;--bg2:#080A10;--surf:#0E1118;--surf2:#141823;--surf3:#1B2130;
+  --t1:#F5F7FC;--t2:#AAB3C5;--t3:#6B7384;
+  --bd:rgba(255,255,255,.08);--bd2:rgba(255,255,255,.16);--bd-br:rgba(110,151,255,.4);
+  --sans:"Pretendard","Inter",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;
+  --mono:"JetBrains Mono","SFMono-Regular",ui-monospace,Menlo,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);--maxw:1240px;
+}
+[data-theme="light"]{
+  --bg:#FFFFFF;--bg2:#F6F8FC;--surf:#FFFFFF;--surf2:#F4F7FC;--surf3:#EAEFF7;
+  --t1:#0A0D14;--t2:#485164;--t3:#7A8398;--bd:rgba(10,13,20,.1);--bd2:rgba(10,13,20,.16);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--t2);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}ul{list-style:none;padding:0}button{font:inherit;cursor:pointer;border:0;background:none}
+img,svg,canvas{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--brand-400);outline-offset:3px;border-radius:4px}
+h1,h2,h3,h4{color:var(--t1);line-height:1.15;font-weight:700;letter-spacing:-.025em}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:24px}
+.eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-400)}
+.grad-text{background:linear-gradient(100deg,#fff 0%,#BFD0FF 45%,#38E1D6 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="light"] .grad-text{background:linear-gradient(100deg,#0A0D14,#2E5BE6 55%,#1AA79C);-webkit-background-clip:text;background-clip:text;color:transparent}
+.muted{color:var(--t3)}.mono{font-family:var(--mono)}
+section{position:relative}
+.sec{padding-block:120px}
+.sec-head{max-width:680px;margin-bottom:56px}
+.sec-head.ctr{margin-inline:auto;text-align:center}
+.sec-head h2{font-size:clamp(1.8rem,1.2rem+2vw,2.7rem);margin-top:14px}
+.sec-head p{margin-top:16px;font-size:1.08rem}
+
+/* ============================ NOISE + MESH ============================ */
+body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:overlay}
+
+/* ============================ BUTTONS ============================ */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:999px;font-weight:600;font-size:.95rem;transition:.3s var(--ease);white-space:nowrap;border:1px solid transparent}
+.btn .ic{width:18px;height:18px;transition:transform .3s var(--ease)}.btn:hover .ic{transform:translateX(3px)}
+.btn-primary{background:var(--g-brand);color:#fff;box-shadow:0 0 0 1px rgba(110,151,255,.3),0 14px 40px rgba(77,124,255,.32)}
+.btn-primary:hover{transform:translateY(-2px);filter:brightness(1.07);box-shadow:0 0 0 1px rgba(110,151,255,.5),0 20px 54px rgba(77,124,255,.42)}
+.btn-ghost{color:var(--t1);border-color:var(--bd2);background:rgba(255,255,255,.02);backdrop-filter:blur(8px)}
+.btn-ghost:hover{border-color:var(--brand-400);background:rgba(77,124,255,.1)}
+.btn-lg{padding:16px 32px;font-size:1rem}.btn-sm{padding:9px 18px;font-size:.85rem}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-size:.8rem;font-weight:600;background:rgba(110,151,255,.1);color:var(--brand-300);border:1px solid var(--bd-br);backdrop-filter:blur(8px)}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* ============================ HEADER ============================ */
+.hdr{position:sticky;top:0;z-index:50;height:72px;display:flex;align-items:center;backdrop-filter:blur(18px);background:color-mix(in srgb,var(--bg) 70%,transparent);border-bottom:1px solid transparent;transition:.3s}
+.hdr.scr{border-color:var(--bd)}
+.hdr .wrap{max-width:1340px;display:flex;align-items:center;justify-content:space-between;gap:32px;width:100%}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--t1);font-size:1.3rem;letter-spacing:-.02em}
+.nav{display:flex;gap:4px}
+.nav a{padding:9px 15px;border-radius:8px;font-size:.92rem;color:var(--t2);font-weight:500;transition:.25s}
+.nav a:hover{color:var(--t1);background:var(--surf2)}
+.hactions{display:flex;align-items:center;gap:12px}
+.icbtn{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:var(--surf2);border:1px solid var(--bd);color:var(--t2)}
+.icbtn:hover{color:var(--t1)}.lang{font-size:.78rem;color:var(--t3)}.lang b{color:var(--t1)}
+.navtog{display:none}
+
+/* ============================ HERO ============================ */
+.hero{position:relative;padding-block:96px 110px;overflow:hidden}
+#net{position:absolute;inset:0;z-index:0;opacity:.6}
+.mesh{position:absolute;border-radius:50%;filter:blur(90px);z-index:0;pointer-events:none}
+.mesh.m1{width:560px;height:560px;background:radial-gradient(circle,rgba(77,124,255,.5),transparent 70%);top:-180px;right:-60px}
+.mesh.m2{width:480px;height:480px;background:radial-gradient(circle,rgba(154,107,255,.34),transparent 70%);bottom:-200px;left:-140px}
+.mesh.m3{width:360px;height:360px;background:radial-gradient(circle,rgba(56,225,214,.2),transparent 70%);top:30%;left:40%}
+.gridmask{position:absolute;inset:0;z-index:0;background-image:linear-gradient(var(--bd) 1px,transparent 1px),linear-gradient(90deg,var(--bd) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 75% 55% at 50% 35%,#000 25%,transparent 75%);opacity:.55}
+.hero .wrap{position:relative;z-index:2;max-width:1340px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.hero h1{font-size:clamp(2.9rem,1.6rem+5vw,5.2rem);line-height:1.04;letter-spacing:-.035em;margin-block:22px}
+.hero .lead{font-size:1.2rem;color:var(--t2);max-width:520px}
+.cta-row{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
+.trust{display:flex;align-items:center;gap:14px;margin-top:48px;flex-wrap:wrap}
+.trust .lbl{font-size:.74rem;color:var(--t3);letter-spacing:.06em}
+.trust .chip{font-size:.84rem;color:var(--t2);font-weight:600;padding:8px 14px;border:1px solid var(--bd);border-radius:8px;background:rgba(255,255,255,.02)}
+
+/* ---- product console mockup ---- */
+.console{position:relative;border-radius:20px;background:linear-gradient(160deg,var(--surf2),var(--surf));border:1px solid var(--bd2);box-shadow:0 40px 100px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.06);overflow:hidden;animation:float 7s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.console::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 80% 0,rgba(77,124,255,.12),transparent 60%);pointer-events:none}
+.con-top{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--bd)}
+.con-top .dots{display:flex;gap:6px}.con-top .dots i{width:11px;height:11px;border-radius:50%;background:var(--surf3)}
+.con-top .ttl{font-family:var(--mono);font-size:.74rem;color:var(--t3)}
+.con-top .live{margin-left:auto;font-size:.7rem;color:var(--green);display:flex;align-items:center;gap:6px}
+.con-top .live i{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 1.6s infinite}
+.con-body{padding:20px;display:grid;gap:16px}
+.con-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tile{background:var(--surf);border:1px solid var(--bd);border-radius:12px;padding:14px}
+.tile .k{font-size:.68rem;color:var(--t3);text-transform:uppercase;letter-spacing:.08em}
+.tile .v{font-family:var(--mono);font-size:1.35rem;color:var(--t1);font-weight:700;margin-top:6px;letter-spacing:-.02em}
+.tile .v small{font-size:.6em;color:var(--brand-400)}
+.con-main{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;background:var(--surf);border:1px solid var(--bd);border-radius:14px;padding:18px}
+.gauge{position:relative;width:120px;height:120px}
+.gauge .lab{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.gauge .lab b{font-family:var(--mono);font-size:1.5rem;color:var(--t1)}
+.gauge .lab span{font-size:.66rem;color:var(--t3)}
+.bars{display:flex;align-items:flex-end;gap:8px;height:104px}
+.bars i{flex:1;border-radius:5px 5px 0 0;background:var(--surf3);position:relative;overflow:hidden}
+.bars i.on{background:var(--g-brand)}
+.bars i::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.25),transparent);opacity:.5}
+.con-foot{display:flex;gap:8px;font-family:var(--mono);font-size:.68rem;color:var(--t3);flex-wrap:wrap}
+.con-foot span{padding:4px 9px;background:var(--surf);border:1px solid var(--bd);border-radius:6px}
+.con-foot span b{color:var(--brand-300)}
+
+/* ============================ MARQUEE ============================ */
+.marq{margin-top:72px;-webkit-mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);overflow:hidden}
+.marq .track{display:flex;gap:48px;width:max-content;animation:scroll 32s linear infinite}
+.marq .track span{font-weight:700;color:var(--t3);font-size:1rem;white-space:nowrap;opacity:.7}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* ============================ PRODUCT CARDS ============================ */
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.pcard{position:relative;border-radius:18px;background:var(--surf);border:1px solid var(--bd);padding:26px;overflow:hidden;transition:.35s var(--ease)}
+.pcard::before{content:"";position:absolute;inset:0;padding:1px;border-radius:18px;background:var(--accent,var(--g-brand));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:.35s}
+.pcard:hover{transform:translateY(-6px);box-shadow:0 30px 60px rgba(0,0,0,.4)}
+.pcard:hover::before{opacity:.8}
+.pcard .glow{position:absolute;width:160px;height:160px;border-radius:50%;filter:blur(50px);top:-40px;right:-40px;opacity:.3;background:var(--accent,var(--brand-500))}
+.pcard h3{font-size:1.2rem;margin:16px 0 8px}
+.pcard p{font-size:.9rem}
+.pviz{height:64px;display:flex;align-items:flex-end;gap:5px;margin-bottom:6px}
+.pcard .arrow{margin-top:18px;color:var(--brand-300);font-weight:600;font-size:.85rem;display:inline-flex;gap:6px}
+.pcard[data-a="gpu"]{--accent:linear-gradient(135deg,#6E97FF,#4D7CFF)}
+.pcard[data-a="model"]{--accent:linear-gradient(135deg,#9A6BFF,#6E97FF)}
+.pcard[data-a="agent"]{--accent:linear-gradient(135deg,#38E1D6,#4D7CFF)}
+.pcard[data-a="nadia"]{--accent:linear-gradient(135deg,#35D08A,#38E1D6)}
+
+/* ============================ ARCHITECTURE ============================ */
+.arch{display:grid;grid-template-columns:repeat(4,1fr);gap:0;align-items:stretch;border:1px solid var(--bd);border-radius:18px;overflow:hidden;background:var(--surf)}
+.layer{padding:30px 24px;border-right:1px solid var(--bd);position:relative;transition:.3s}
+.layer:last-child{border-right:0}
+.layer:hover{background:var(--surf2)}
+.layer .step{font-family:var(--mono);font-size:.72rem;color:var(--brand-400)}
+.layer h4{font-size:1.05rem;margin:10px 0 8px}
+.layer p{font-size:.84rem}
+.layer .ln{position:absolute;top:42px;right:-7px;width:14px;height:14px;z-index:2;color:var(--brand-400)}
+.layer:last-child .ln{display:none}
+
+/* ============================ METRICS ============================ */
+.mband{position:relative;border-radius:24px;padding:60px 40px;background:linear-gradient(135deg,var(--surf2),var(--surf));border:1px solid var(--bd);overflow:hidden}
+.mband::before{content:"";position:absolute;inset:0;background:radial-gradient(80% 120% at 15% 0,rgba(77,124,255,.16),transparent 50%),radial-gradient(70% 120% at 90% 100%,rgba(154,107,255,.12),transparent 50%)}
+.mgrid{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.metric{padding-left:18px;border-left:2px solid var(--bd-br)}
+.metric .num{font-family:var(--mono);font-size:clamp(2rem,1.4rem+2vw,3.1rem);font-weight:700;color:var(--t1);line-height:1;letter-spacing:-.02em}
+.metric .num .u{font-size:.5em;color:var(--brand-400);margin-left:3px}
+.metric .lab{margin-top:12px;color:var(--t2);font-size:.92rem;font-weight:500}
+.metric .sub{color:var(--t3);font-size:.78rem;margin-top:4px}
+
+/* ============================ SOLUTIONS / INSIGHTS ============================ */
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.scard{border-radius:18px;border:1px solid var(--bd);background:var(--surf);overflow:hidden;transition:.35s var(--ease)}
+.scard:hover{transform:translateY(-5px);border-color:var(--bd2);box-shadow:0 24px 50px rgba(0,0,0,.35)}
+.scard .top{height:140px;position:relative;overflow:hidden}
+.scard .top .cat{position:absolute;left:16px;top:16px;z-index:2}
+.scard .bd{padding:24px}
+.scard h3{font-size:1.15rem;margin-bottom:8px}.scard p{font-size:.9rem}
+.scard .date{font-size:.78rem;color:var(--t3);margin-bottom:10px}
+/* generated thumbnails */
+.thumb-a{background:radial-gradient(120% 120% at 20% 10%,#2E5BE6,transparent 55%),radial-gradient(120% 120% at 90% 90%,#9A6BFF,transparent 50%),#0c1018}
+.thumb-b{background:radial-gradient(120% 120% at 80% 10%,#1AA79C,transparent 55%),radial-gradient(120% 120% at 10% 90%,#4D7CFF,transparent 50%),#0c1018}
+.thumb-c{background:radial-gradient(120% 120% at 30% 90%,#6E4DCF,transparent 55%),radial-gradient(120% 120% at 90% 10%,#38E1D6,transparent 45%),#0c1018}
+.thumb-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:26px 26px;opacity:.5}
+
+/* ============================ CTA ============================ */
+.ctaband{position:relative;border-radius:28px;padding:80px 40px;text-align:center;overflow:hidden;border:1px solid var(--bd-br);background:linear-gradient(135deg,var(--surf2),var(--surf))}
+.ctaband::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 120% at 50% 0,rgba(77,124,255,.22),transparent 55%)}
+.ctaband>*{position:relative}
+.ctaband h2{font-size:clamp(1.8rem,1.2rem+2vw,2.8rem)}
+
+/* ============================ FOOTER ============================ */
+.ft{border-top:1px solid var(--bd);padding-block:72px 36px;background:var(--bg2)}
+.ftgrid{display:grid;grid-template-columns:1.5fr repeat(4,1fr);gap:40px}
+.ftgrid h4{font-size:.74rem;text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-bottom:16px;font-weight:700}
+.ftgrid a{color:var(--t2);font-size:.9rem;display:block;padding:5px 0;transition:.2s}.ftgrid a:hover{color:var(--t1)}
+.ftbot{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-top:56px;padding-top:28px;border-top:1px solid var(--bd);flex-wrap:wrap}
+.ftbot .lg{color:var(--t3);font-size:.78rem}
+.socials{display:flex;gap:12px}.socials a{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:var(--surf2);border:1px solid var(--bd);color:var(--t2)}.socials a:hover{color:var(--t1)}
+
+/* ============================ REVEAL ============================ */
+[data-rv]{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+[data-rv].in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ============================ RESPONSIVE ============================ */
+@media(max-width:980px){
+  .hero-grid{grid-template-columns:1fr;gap:48px}.pgrid{grid-template-columns:repeat(2,1fr)}
+  .arch{grid-template-columns:1fr 1fr}.layer:nth-child(2){border-right:0}
+  .mgrid{grid-template-columns:repeat(2,1fr);gap:32px}.cards3{grid-template-columns:1fr}
+  .ftgrid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:680px){
+  .nav{display:none}.navtog{display:grid}.sec{padding-block:80px}
+  .pgrid{grid-template-columns:1fr}.arch{grid-template-columns:1fr}.layer{border-right:0;border-bottom:1px solid var(--bd)}
+  .mgrid{grid-template-columns:1fr}.ftgrid{grid-template-columns:1fr}.ftbot{flex-direction:column;align-items:flex-start}
+  .drawer{display:block}
+}
+.drawer{position:fixed;inset:72px 0 0;z-index:40;background:var(--bg);padding:32px;transform:translateY(-10px);opacity:0;pointer-events:none;transition:.3s;display:none}
+.drawer.open{opacity:1;transform:none;pointer-events:auto}
+.drawer a{display:block;padding:16px 0;font-size:1.2rem;color:var(--t1);border-bottom:1px solid var(--bd)}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="wrap">
+    <a class="brand" href="#"><svg width="30" height="30" viewBox="0 0 32 32"><defs><linearGradient id="lg" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#4D7CFF"/><stop offset=".55" stop-color="#9A6BFF"/><stop offset="1" stop-color="#38E1D6"/></linearGradient></defs><path d="M16 3 L27 22 H21 L16 12 L11 22 H5 Z" fill="url(#lg)"/><circle cx="16" cy="26" r="3" fill="#38E1D6"/></svg>ACRYL</a>
+    <nav class="nav"><a href="#products">제품</a><a href="#arch">플랫폼</a><a href="#solutions">솔루션</a><a href="#insights">인사이트</a><a href="#">IR</a><a href="#">채용</a></nav>
+    <div class="hactions">
+      <span class="lang"><b>KR</b> / EN</span>
+      <button class="icbtn" data-act="theme" aria-label="테마"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg></button>
+      <a class="btn btn-primary btn-sm" href="#contact">문의하기</a>
+      <button class="icbtn navtog" data-act="drawer" aria-label="메뉴"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="drawer"><a href="#products" data-act="dlink">제품</a><a href="#arch" data-act="dlink">플랫폼</a><a href="#solutions" data-act="dlink">솔루션</a><a href="#insights" data-act="dlink">인사이트</a></nav>
+
+<main>
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <canvas id="net"></canvas>
+  <span class="mesh m1"></span><span class="mesh m2"></span><span class="mesh m3"></span>
+  <div class="gridmask"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div data-rv>
+        <span class="badge"><span class="dot"></span>2025.12 KOSDAQ 기술특례 상장</span>
+        <h1>AI to AX.<br><span class="grad-text">Realized.</span></h1>
+        <p class="lead">컴퓨팅부터 모델 운영, 에이전트 오케스트레이션, 의료 AI까지 —
+          14년간 검증한 기술로 기업의 AX를 하나의 스택에서 완성합니다.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary btn-lg" href="#products">플랫폼 살펴보기<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-ghost btn-lg" href="#contact">도입 상담</a>
+        </div>
+        <div class="trust">
+          <span class="lbl">검증된 현장</span>
+          <span class="chip">삼성서울병원</span><span class="chip">국가보훈부</span><span class="chip">KB손해보험</span><span class="chip">+200 레퍼런스</span>
+        </div>
+      </div>
+      <!-- product console mockup -->
+      <div data-rv>
+        <div class="console">
+          <div class="con-top"><span class="dots"><i></i><i></i><i></i></span><span class="ttl">gpubase · cluster/seoul-01</span><span class="live"><i></i>LIVE</span></div>
+          <div class="con-body">
+            <div class="con-tiles">
+              <div class="tile"><div class="k">Utilization</div><div class="v" data-count="85" data-dec="0">0<small>%</small></div></div>
+              <div class="tile"><div class="k">Throughput</div><div class="v" data-count="1.5" data-dec="1">0<small>×</small></div></div>
+              <div class="tile"><div class="k">GPU Nodes</div><div class="v" data-count="128" data-dec="0">0</div></div>
+            </div>
+            <div class="con-main">
+              <div class="gauge">
+                <svg width="120" height="120" viewBox="0 0 120 120">
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="var(--surf3)" stroke-width="10"/>
+                  <circle id="gring" cx="60" cy="60" r="50" fill="none" stroke="url(#gg)" stroke-width="10" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="314" transform="rotate(-90 60 60)"/>
+                  <defs><linearGradient id="gg" x1="0" y1="0" x2="120" y2="120"><stop offset="0" stop-color="#4D7CFF"/><stop offset="1" stop-color="#38E1D6"/></linearGradient></defs>
+                </svg>
+                <div class="lab"><b>85%</b><span>GPU 활용률</span></div>
+              </div>
+              <div class="bars" id="bars"></div>
+            </div>
+            <div class="con-foot"><span>RDMA <b>multi-path</b></span><span>NVIDIA·AMD·NPU</span><span>distributed <b>1.5×</b></span><span>queue <b>0</b></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- marquee -->
+    <div class="marq" data-rv><div class="track">
+      <span>삼성서울병원</span><span>·</span><span>국가보훈부</span><span>·</span><span>통일부</span><span>·</span><span>KB손해보험</span><span>·</span><span>중소벤처기업부</span><span>·</span><span>과학기술정보통신부</span><span>·</span>
+      <span>삼성서울병원</span><span>·</span><span>국가보훈부</span><span>·</span><span>통일부</span><span>·</span><span>KB손해보험</span><span>·</span><span>중소벤처기업부</span><span>·</span><span>과학기술정보통신부</span><span>·</span>
+    </div></div>
+  </div>
+</section>
+
+<!-- ===== PRODUCTS ===== -->
+<section class="sec" id="products">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Platform</span><h2>하나의 스택으로 완성하는 <span class="grad-text">엔드투엔드 AX</span></h2><p>컴퓨팅·모델·에이전트·도메인 AI가 유기적으로 연결됩니다.</p></div>
+    <div class="pgrid">
+      <a class="pcard" data-a="gpu" data-rv href="#"><span class="glow"></span>
+        <div class="pviz"><i style="height:40%;width:14%;background:var(--surf3);border-radius:4px"></i><i style="height:62%;width:14%;background:var(--surf3);border-radius:4px"></i><i style="height:50%;width:14%;background:var(--surf3);border-radius:4px"></i><i style="height:88%;width:14%;background:linear-gradient(180deg,#6E97FF,#4D7CFF);border-radius:4px"></i><i style="height:80%;width:14%;background:linear-gradient(180deg,#6E97FF,#4D7CFF);border-radius:4px"></i></div>
+        <h3>GPUBASE</h3><p>GPU·NPU 컴퓨팅 최적화. 소프트웨어만으로 가동률 85%, 멀티패스 RDMA 가속.</p><span class="arrow">자세히 →</span></a>
+      <a class="pcard" data-a="model" data-rv href="#"><span class="glow"></span>
+        <div class="pviz"><svg width="100%" height="64" viewBox="0 0 120 64" fill="none"><path d="M2 50 Q30 50 40 30 T80 18 T118 8" stroke="#9A6BFF" stroke-width="2.5" fill="none"/><circle cx="40" cy="30" r="3" fill="#9A6BFF"/><circle cx="80" cy="18" r="3" fill="#9A6BFF"/></svg></div>
+        <h3>MODELBASE</h3><p>모델 라이프사이클 전 단계 자동화 — 데이터·학습·검증·배포 MLOps.</p><span class="arrow">자세히 →</span></a>
+      <a class="pcard" data-a="agent" data-rv href="#"><span class="glow"></span>
+        <div class="pviz"><svg width="100%" height="64" viewBox="0 0 120 64" fill="none"><circle cx="60" cy="14" r="6" fill="#38E1D6"/><circle cx="24" cy="50" r="5" fill="#4D7CFF"/><circle cx="96" cy="50" r="5" fill="#4D7CFF"/><path d="M60 20v12M52 38l-22 8M68 38l22 8" stroke="#38E1D6" stroke-width="1.6"/></svg></div>
+        <h3>AGENTBASE</h3><p>LLM·에이전트 오케스트레이션 LLMOps. RAG·파인튜닝 통합.</p><span class="arrow">자세히 →</span></a>
+      <a class="pcard" data-a="nadia" data-rv href="#"><span class="glow"></span>
+        <div class="pviz"><svg width="100%" height="64" viewBox="0 0 120 64" fill="none"><path d="M4 36h26l8-18 12 36 10-26 8 14h36" stroke="#35D08A" stroke-width="2.5" fill="none" stroke-linejoin="round"/></svg></div>
+        <h3>NADIA-ANE</h3><p>의료 특화 AI EMR. 임상 데이터 정규화·CDSS·식약처 허가 SaMD.</p><span class="arrow">자세히 →</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ARCHITECTURE ===== -->
+<section class="sec" id="arch" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Architecture</span><h2>인프라에서 서비스까지, 끊김 없는 흐름</h2></div>
+    <div class="arch" data-rv>
+      <div class="layer"><div class="step">01 · Compute</div><h4>GPUBASE</h4><p>이기종 GPU·NPU 가상화와 자원 스케줄링.</p><svg class="ln" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="layer"><div class="step">02 · Model</div><h4>MODELBASE</h4><p>학습·검증·배포 자동화 MLOps.</p><svg class="ln" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="layer"><div class="step">03 · Agent</div><h4>AGENTBASE</h4><p>LLM·에이전트 오케스트레이션.</p><svg class="ln" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="layer"><div class="step">04 · Domain</div><h4>NADIA-ANE</h4><p>의료 등 도메인 특화 AI 서비스.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== METRICS ===== -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="mband" data-rv>
+      <div class="mgrid">
+        <div class="metric"><div class="num"><span data-count="89.08" data-dec="2">0</span><span class="u">%</span></div><div class="lab">EHRSQL 벤치마크 SOTA</div><div class="sub">의료 텍스트-to-SQL 외부검증</div></div>
+        <div class="metric"><div class="num"><span data-count="200" data-dec="0">0</span><span class="u">+</span></div><div class="lab">산업 AI 운영 레퍼런스</div><div class="sub">정부·지자체·상급종합병원</div></div>
+        <div class="metric"><div class="num"><span data-count="85" data-dec="0">0</span><span class="u">%</span></div><div class="lab">GPU 활용률</div><div class="sub">소프트웨어 정의 인프라</div></div>
+        <div class="metric"><div class="num"><span data-count="14" data-dec="0">0</span><span class="u">년</span></div><div class="lab">AI 기술 자산</div><div class="sub">2011 설립 · 2025 상장</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOLUTIONS ===== -->
+<section class="sec" id="solutions" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head ctr"><span class="eyebrow">Solutions</span><h2>산업 현장에서 검증된 AX</h2><p>경제적이고 쉬운 방식으로 산업별 주권형 AI를 구축합니다.</p></div>
+    <div class="cards3">
+      <div class="scard" data-rv><div class="top thumb-a"><div class="thumb-grid"></div><span class="badge cat">Healthcare</span></div><div class="bd"><h3>헬스케어</h3><p>NADIA 기반 임상 인텔리전스. HIS·EMR·PACS 연동, SaMD 가속, 1만+ 병상.</p></div></div>
+      <div class="scard" data-rv><div class="top thumb-b"><div class="thumb-grid"></div><span class="badge cat">Defense · Public</span></div><div class="bd"><h3>국방 · 공공</h3><p>온프레미스 보안 AI와 주권 AI 컴플라이언스 기반 기밀 데이터 처리.</p></div></div>
+      <div class="scard" data-rv><div class="top thumb-c"><div class="thumb-grid"></div><span class="badge cat">Enterprise</span></div><div class="bd"><h3>제조 · 엔터프라이즈</h3><p>산업특화 모델 개발·배포. 품질검사·예지보전, 80+ 엔터프라이즈 도입.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INSIGHTS ===== -->
+<section class="sec" id="insights" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head" style="display:flex;justify-content:space-between;align-items:flex-end;max-width:none"><div><span class="eyebrow">Newsroom</span><h2 style="margin-top:10px">ACRYL 인사이트</h2></div><a class="btn btn-ghost btn-sm" href="#">전체 보기 →</a></div>
+    <div class="cards3">
+      <article class="scard" data-rv><div class="top thumb-b"><div class="thumb-grid"></div><span class="badge cat">News</span></div><div class="bd"><div class="date">2026.02.05</div><h3 style="font-size:1.05rem">2025년 중소기업 R&D 우수성과 50선 — 공공혁신 분야 등재</h3></div></article>
+      <article class="scard" data-rv><div class="top thumb-c"><div class="thumb-grid"></div><span class="badge cat">News</span></div><div class="bd"><div class="date">2026.01.05</div><h3 style="font-size:1.05rem">에듀테크 3사와 'K-AI 교육 플랫폼' 구축… 600조 시장 공략</h3></div></article>
+      <article class="scard" data-rv><div class="top thumb-a"><div class="thumb-grid"></div><span class="badge cat">Award</span></div><div class="bd"><div class="date">2025.12.19</div><h3 style="font-size:1.05rem">과기부총리상 수상… 국가 공인 AX 인프라 파트너 입증</h3></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="sec" id="contact" style="padding-top:0">
+  <div class="wrap">
+    <div class="ctaband" data-rv>
+      <span class="eyebrow">Contact</span>
+      <h2 style="margin-top:16px">전문가의 도움이 필요하신가요?</h2>
+      <p class="lead" style="margin:16px auto 0;max-width:520px">AI 도입과 관련된 고민을 진단하고 해결해 드립니다.</p>
+      <div class="cta-row" style="justify-content:center;margin-top:32px"><a class="btn btn-primary btn-lg" href="#">데모 요청</a><a class="btn btn-ghost btn-lg" href="#">도입 문의</a></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="ftgrid">
+      <div><a class="brand" href="#"><svg width="28" height="28" viewBox="0 0 32 32"><path d="M16 3 L27 22 H21 L16 12 L11 22 H5 Z" fill="url(#lg)"/></svg>ACRYL</a><p class="muted" style="margin-top:16px;font-size:.9rem;max-width:280px">AI to AX. Realized.<br>검증된 기술로 완성하는 통합 AX 인프라.</p></div>
+      <div><h4>Platform</h4><a href="#">GPUBASE</a><a href="#">MODELBASE</a><a href="#">AGENTBASE</a><a href="#">NADIA-ANE</a></div>
+      <div><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">IR</a><a href="#">Contact</a></div>
+      <div><h4>Resources</h4><a href="#">Insights</a><a href="#">Tech Blog</a><a href="#">Docs</a><a href="#">Use Cases</a></div>
+      <div><h4>Contact</h4><a href="mailto:info@acryl.ai">info@acryl.ai</a><a href="tel:+82-2-557-4958">+82.2.557.4958</a><span class="muted" style="font-size:.76rem;display:block;padding-top:8px;line-height:1.6">7F/8F, Chungdam Venture Plaza,<br>704 Seolleung-ro, Gangnam-gu, Seoul</span></div>
+    </div>
+    <div class="ftbot">
+      <span class="lg">© 2026 ACRYL inc. All rights reserved.</span>
+      <div class="socials">
+        <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8h2V5h-2a3 3 0 0 0-3 3v2H9v3h2v6h3v-6h2.5l.5-3H14V8.5z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var root=document.documentElement;
+  var saved=localStorage.getItem("acryl-theme"); if(saved)root.setAttribute("data-theme",saved);
+  var drawer=document.querySelector(".drawer");
+  document.addEventListener("click",function(e){
+    var t=e.target.closest("[data-act]"); if(!t)return; var a=t.getAttribute("data-act");
+    if(a==="theme"){var n=root.getAttribute("data-theme")==="light"?"dark":"light";root.setAttribute("data-theme",n);localStorage.setItem("acryl-theme",n);}
+    if(a==="drawer")drawer.classList.toggle("open");
+    if(a==="dlink")drawer.classList.remove("open");
+  });
+  var hdr=document.querySelector(".hdr");
+  addEventListener("scroll",function(){hdr.classList.toggle("scr",scrollY>8);},{passive:true});
+
+  // bars
+  var bars=document.getElementById("bars");
+  if(bars){var hs=[45,52,40,60,55,82,78,85,80,88];hs.forEach(function(h,i){var b=document.createElement("i");b.style.height=h+"%";if(h>=78)b.className="on";bars.appendChild(b);});}
+
+  // reveal + counters
+  function countUp(el){var t=parseFloat(el.getAttribute("data-count")),d=el.getAttribute("data-dec")|0,s=performance.now(),dur=1200;
+    var suf=el.querySelector("small"); var sufHTML=suf?suf.outerHTML:"";
+    (function step(now){var p=Math.min((now-s)/dur,1),e=1-Math.pow(1-p,3);el.firstChild&&(el.childNodes[0].nodeValue=(t*e).toFixed(d));if(p<1)requestAnimationFrame(step);else el.childNodes[0].nodeValue=t.toFixed(d);})(s);}
+  var rio=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");rio.unobserve(x.target);}});},{threshold:.12});
+  document.querySelectorAll("[data-rv]").forEach(function(el,i){el.style.transitionDelay=(i%4)*70+"ms";rio.observe(el);});
+  var cio=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){countUp(x.target);cio.unobserve(x.target);}});},{threshold:.5});
+  document.querySelectorAll("[data-count]").forEach(function(c){cio.observe(c);});
+
+  // gauge
+  var ring=document.getElementById("gring");
+  if(ring){var gio=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){ring.style.transition="stroke-dashoffset 1.6s cubic-bezier(.16,1,.3,1)";ring.style.strokeDashoffset=314*(1-0.85);gio.unobserve(x.target);}});},{threshold:.5});gio.observe(ring);}
+
+  // particle network
+  var c=document.getElementById("net"); if(c && !matchMedia("(prefers-reduced-motion:reduce)").matches){
+    var ctx=c.getContext("2d"),W,H,pts,raf;
+    function size(){W=c.width=c.offsetWidth*devicePixelRatio;H=c.height=c.offsetHeight*devicePixelRatio;
+      var n=Math.min(70,Math.floor(W*H/26000));pts=[];for(var i=0;i<n;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25*devicePixelRatio,vy:(Math.random()-.5)*.25*devicePixelRatio});}
+    function draw(){ctx.clearRect(0,0,W,H);for(var i=0;i<pts.length;i++){var p=pts[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
+      for(var j=i+1;j<pts.length;j++){var q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.hypot(dx,dy),md=140*devicePixelRatio;
+        if(d<md){ctx.strokeStyle="rgba(110,151,255,"+(.18*(1-d/md))+")";ctx.lineWidth=devicePixelRatio;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();}}
+      ctx.fillStyle="rgba(140,176,255,.55)";ctx.beginPath();ctx.arc(p.x,p.y,1.4*devicePixelRatio,0,7);ctx.fill();}
+      raf=requestAnimationFrame(draw);}
+    size();draw();addEventListener("resize",function(){cancelAnimationFrame(raf);size();draw();});
+  }
+})();
+</script>
+</body>
+</html>
