@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPUBASE — GPU·NPU 컴퓨팅 최적화 | ACRYL</title>
+<meta name="description" content="GPUBASE는 소프트웨어 정의 GPU 인프라로 가동률을 85%까지 끌어올리는 ACRYL의 컴퓨팅 최적화 베이스입니다.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container wide">
+    <a class="brand" href="index.html"><svg class="logo" viewBox="0 0 32 32" fill="none"><defs><linearGradient id="lg" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#4D7CFF"/><stop offset=".55" stop-color="#9A6BFF"/><stop offset="1" stop-color="#38E1D6"/></linearGradient></defs><path d="M16 3 L27 22 H21 L16 12 L11 22 H5 Z" fill="url(#lg)"/><circle cx="16" cy="26" r="3" fill="#38E1D6"/></svg>ACRYL</a>
+    <nav class="nav" aria-label="주 메뉴">
+      <a href="product-gpubase.html" aria-current="page">제품</a>
+      <a href="index.html#solutions">솔루션</a>
+      <a href="index.html#insights">인사이트</a>
+      <a href="ir.html">IR</a>
+      <a href="careers.html">채용</a>
+    </nav>
+    <div class="header-actions">
+      <span class="lang"><b>KR</b> / EN</span>
+      <button class="theme-toggle" data-action="theme" aria-label="테마 전환"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg></button>
+      <a class="btn btn-primary btn-sm" href="#contact">문의하기</a>
+      <button class="nav-toggle" data-action="drawer" aria-label="메뉴 열기"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="drawer"><a href="index.html#products" data-action="drawer-link">제품</a><a href="index.html#solutions" data-action="drawer-link">솔루션</a><a href="ir.html" data-action="drawer-link">IR</a><a href="careers.html" data-action="drawer-link">채용</a></nav>
+
+<main>
+<!-- product hero -->
+<section class="hero" style="padding-block:var(--space-20) var(--space-16)">
+  <div class="hero-bg"><span class="glow g1"></span></div>
+  <div class="grid-overlay"></div>
+  <div class="container wide">
+    <p class="muted" style="font-size:var(--fs-sm)"><a href="index.html">홈</a> / 제품 / <span style="color:var(--text-1)">GPUBASE</span></p>
+    <div class="hero-grid mt-8">
+      <div data-reveal>
+        <span class="badge brand" data-accent="gpu">Computing · GPU·NPU</span>
+        <h1 class="display mt-4">GPUBASE</h1>
+        <p class="lead mt-4">소프트웨어만으로 GPU 가동률 <b style="color:var(--text-1)">85%</b>.
+          이기종(NVIDIA·AMD·TPU·NPU) 자원을 소프트웨어 정의 인프라로 통합하고,
+          멀티패스 RDMA로 분산 학습을 가속합니다.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary btn-lg" href="#contact">기술 상담</a>
+          <a class="btn btn-ghost btn-lg" href="#">기술 문서 →</a>
+        </div>
+      </div>
+      <div data-reveal>
+        <div class="card" style="background:var(--surface-1)">
+          <div class="mono" style="font-size:var(--fs-xs);color:var(--text-3)">cluster · utilization</div>
+          <div style="display:flex;align-items:flex-end;gap:10px;height:160px;margin-top:var(--space-6)">
+            <div style="flex:1;height:38%;background:var(--surface-3);border-radius:6px 6px 0 0"></div>
+            <div style="flex:1;height:52%;background:var(--surface-3);border-radius:6px 6px 0 0"></div>
+            <div style="flex:1;height:45%;background:var(--surface-3);border-radius:6px 6px 0 0"></div>
+            <div style="flex:1;height:85%;background:var(--gradient-brand);border-radius:6px 6px 0 0;box-shadow:var(--glow-brand)"></div>
+            <div style="flex:1;height:78%;background:var(--gradient-brand);border-radius:6px 6px 0 0"></div>
+            <div style="flex:1;height:82%;background:var(--gradient-brand);border-radius:6px 6px 0 0"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:var(--space-4)">
+            <span class="muted" style="font-size:var(--fs-xs)">Before 45%</span>
+            <span class="badge brand"><span class="dot"></span>GPUBASE 85%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- feature grid -->
+<section class="section">
+  <div class="container wide">
+    <div class="section-head"><span class="eyebrow">Capabilities</span><h2>핵심 기능</h2></div>
+    <div class="grid cols-3">
+      <div class="card" data-reveal><div class="card-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div><h3>소프트웨어 정의 GPU</h3><p>물리 자원을 가상화·풀링하여 워크로드 단위로 동적 할당. 유휴 자원 최소화.</p></div>
+      <div class="card" data-reveal><div class="card-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h4l2-6 4 12 2-6h4"/></svg></div><h3>멀티패스 RDMA</h3><p>다중 경로 RDMA로 노드 간 통신 병목 제거, 분산 학습 평균 1.5배 가속.</p></div>
+      <div class="card" data-reveal><div class="card-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div><h3>이기종 스케줄링</h3><p>NVIDIA·AMD·TPU·NPU 혼합 클러스터를 단일 스케줄러로 통합 운영.</p></div>
+      <div class="card" data-reveal><div class="card-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg></div><h3>온프레미스·주권 AI</h3><p>국방·공공 보안요건을 충족하는 폐쇄망/온프레미스 배포 지원.</p></div>
+      <div class="card" data-reveal><div class="card-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h18M12 3v18"/><circle cx="12" cy="12" r="4"/></svg></div><h3>실시간 관측성</h3><p>가동률·전력·온도·큐를 실시간 대시보드로 가시화하고 자동 리밸런싱.</p></div>
+      <div class="card" data-reveal><div class="card-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M5 8l7-5 7 5"/></svg></div><h3>상위 스택 연동</h3><p>MODELBASE·AGENTBASE와 네이티브 연동으로 학습→배포→운영 일원화.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- cta -->
+<section class="section" id="contact"><div class="container"><div class="cta-band" data-reveal>
+  <span class="eyebrow">Contact</span><h2 class="mt-4">GPU 인프라, 더 효율적으로</h2>
+  <p class="lead">현재 환경 진단부터 PoC까지 — 전문가가 함께합니다.</p>
+  <div class="cta-row" style="justify-content:center;margin-top:var(--space-8)"><a class="btn btn-primary btn-lg" href="#">기술 상담 요청</a></div>
+</div></div></section>
+</main>
+
+<footer class="site-footer"><div class="container wide">
+  <div class="footer-bottom" style="margin-top:0;border:0;padding-top:0">
+    <span class="legal">© 2026 ACRYL inc. · info@acryl.ai · +82.2.557.4958</span>
+    <a class="muted" style="font-size:var(--fs-sm)" href="index.html">← 홈으로</a>
+  </div>
+</div></footer>
+<script src="main.js"></script>
+</body>
+</html>
