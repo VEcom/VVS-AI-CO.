@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Careers — 함께 성장할 동료를 찾습니다 | ACRYL</title>
+<meta name="description" content="ACRYL 채용. AI 인프라·플랫폼·의료 AI를 만드는 팀에서 학생부터 시니어까지, 빛나는 여정을 함께할 동료를 찾습니다.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style id="tokens">
+/* ==========================================================================
+   ACRYL Design System — Foundation Tokens
+   리뉴얼 옵션 A 산출물 / 다크 우선 + 라이트 모드 지원
+   모티프: 연결점(node)·레이어·그리드 — AI칩 생태계 ↔ 글로벌 빅테크의 '연결'
+   ========================================================================== */
+
+:root {
+  /* --- Brand ------------------------------------------------------------ */
+  --brand-300: #8FB0FF;
+  --brand-400: #6E97FF;
+  --brand-500: #4D7CFF;   /* primary */
+  --brand-600: #2E5BE6;
+  --brand-700: #1F44B8;
+  --accent-cyan:   #38E1D6;
+  --accent-violet: #9A6BFF;
+
+  --gradient-brand: linear-gradient(135deg, #4D7CFF 0%, #9A6BFF 55%, #38E1D6 100%);
+  --gradient-soft:  linear-gradient(135deg, rgba(77,124,255,.18), rgba(154,107,255,.10) 60%, rgba(56,225,214,.10));
+  --gradient-text:  linear-gradient(100deg, #FFFFFF 0%, #BFD0FF 45%, #38E1D6 100%);
+
+  /* --- Surfaces (dark) -------------------------------------------------- */
+  --bg-900: #06070A;
+  --bg-800: #0A0C11;
+  --bg-700: #0F1218;
+  --surface-1: #14181F;
+  --surface-2: #1A1F28;
+  --surface-3: #212733;
+
+  /* --- Text ------------------------------------------------------------- */
+  --text-1: #F4F6FB;
+  --text-2: #AEB6C5;
+  --text-3: #6F778A;
+  --text-inv: #06070A;
+
+  /* --- Lines ------------------------------------------------------------ */
+  --border:        rgba(255,255,255,.08);
+  --border-strong: rgba(255,255,255,.16);
+  --border-brand:  rgba(77,124,255,.45);
+
+  /* --- Semantic --------------------------------------------------------- */
+  --success: #35D08A;
+  --warning: #F2B84B;
+  --danger:  #F2657A;
+  --info:    var(--brand-500);
+
+  /* --- Typography ------------------------------------------------------- */
+  --font-sans: "Pretendard", "Inter", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", ui-monospace, Menlo, monospace;
+
+  --fs-display: clamp(2.75rem, 1.6rem + 4.6vw, 5rem);
+  --fs-h1: clamp(2.1rem, 1.4rem + 2.8vw, 3.4rem);
+  --fs-h2: clamp(1.6rem, 1.2rem + 1.7vw, 2.4rem);
+  --fs-h3: clamp(1.3rem, 1.1rem + 0.8vw, 1.6rem);
+  --fs-h4: 1.2rem;
+  --fs-lg: 1.125rem;
+  --fs-base: 1rem;
+  --fs-sm: 0.9375rem;
+  --fs-xs: 0.8125rem;
+
+  --lh-tight: 1.12;
+  --lh-snug: 1.3;
+  --lh-base: 1.65;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --tracking-tight: -0.02em;
+  --tracking-wide: 0.08em;
+
+  /* --- Spacing (4px base) ----------------------------------------------- */
+  --space-1: 4px;   --space-2: 8px;   --space-3: 12px;  --space-4: 16px;
+  --space-5: 20px;  --space-6: 24px;  --space-8: 32px;  --space-10: 40px;
+  --space-12: 48px; --space-16: 64px; --space-20: 80px; --space-24: 96px;
+  --space-32: 128px;
+
+  /* --- Radius ----------------------------------------------------------- */
+  --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 24px; --r-2xl: 32px;
+  --r-pill: 999px;
+
+  /* --- Elevation / glow ------------------------------------------------- */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+  --shadow-md: 0 8px 24px rgba(0,0,0,.45);
+  --shadow-lg: 0 24px 60px rgba(0,0,0,.55);
+  --glow-brand: 0 0 0 1px rgba(77,124,255,.35), 0 12px 48px rgba(77,124,255,.28);
+
+  /* --- Layout ----------------------------------------------------------- */
+  --container: 1200px;
+  --container-wide: 1360px;
+  --header-h: 72px;
+
+  /* --- Motion ----------------------------------------------------------- */
+  --dur-fast: 140ms;
+  --dur: 240ms;
+  --dur-slow: 520ms;
+  --ease: cubic-bezier(.22,.61,.36,1);
+  --ease-out: cubic-bezier(.16,1,.3,1);
+}
+
+/* --- Light theme override ------------------------------------------------ */
+[data-theme="light"] {
+  --bg-900: #FFFFFF;
+  --bg-800: #F7F8FB;
+  --bg-700: #F1F3F8;
+  --surface-1: #FFFFFF;
+  --surface-2: #F5F7FB;
+  --surface-3: #ECEFF6;
+
+  --text-1: #0B0E14;
+  --text-2: #424A5C;
+  --text-3: #79829A;
+  --text-inv: #FFFFFF;
+
+  --border:        rgba(11,14,20,.10);
+  --border-strong: rgba(11,14,20,.18);
+
+  --gradient-soft: linear-gradient(135deg, rgba(77,124,255,.10), rgba(154,107,255,.06) 60%, rgba(56,225,214,.07));
+  --gradient-text: linear-gradient(100deg, #0B0E14 0%, #2E5BE6 55%, #1AA79C 100%);
+
+  --shadow-sm: 0 1px 2px rgba(16,24,40,.06);
+  --shadow-md: 0 10px 30px rgba(16,24,40,.10);
+  --shadow-lg: 0 24px 60px rgba(16,24,40,.14);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
+
+</style>
+<style id="styles">
+/* ==========================================================================
+   ACRYL Design System — Base · Layout · Components
+   ========================================================================== */
+
+/* --- Reset --------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  color: var(--text-2);
+  background: var(--bg-900);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; padding: 0; }
+button { font: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--brand-400); outline-offset: 3px; border-radius: 4px; }
+
+/* --- Typography ---------------------------------------------------------- */
+h1,h2,h3,h4 { color: var(--text-1); line-height: var(--lh-snug); font-weight: var(--fw-semibold); letter-spacing: var(--tracking-tight); }
+.display { font-size: var(--fs-display); line-height: var(--lh-tight); font-weight: var(--fw-bold); letter-spacing: -0.03em; color: var(--text-1); }
+h1, .h1 { font-size: var(--fs-h1); }
+h2, .h2 { font-size: var(--fs-h2); }
+h3, .h3 { font-size: var(--fs-h3); }
+.lead { font-size: var(--fs-lg); color: var(--text-2); }
+.eyebrow { font-size: var(--fs-xs); font-weight: var(--fw-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--brand-400); }
+.mono { font-family: var(--font-mono); }
+.text-gradient { background: var(--gradient-text); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.muted { color: var(--text-3); }
+
+/* --- Layout -------------------------------------------------------------- */
+.container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--space-6); }
+.container.wide { max-width: var(--container-wide); }
+.section { padding-block: var(--space-24); position: relative; }
+.section.tight { padding-block: var(--space-16); }
+.section-head { max-width: 720px; margin-bottom: var(--space-12); }
+.section-head.center { margin-inline: auto; text-align: center; }
+.section-head .eyebrow { margin-bottom: var(--space-3); display: inline-block; }
+.section-head p { margin-top: var(--space-4); }
+.grid { display: grid; gap: var(--space-6); }
+.cols-2 { grid-template-columns: repeat(2,1fr); }
+.cols-3 { grid-template-columns: repeat(3,1fr); }
+.cols-4 { grid-template-columns: repeat(4,1fr); }
+.stack > * + * { margin-top: var(--space-4); }
+.divider { height: 1px; background: var(--border); border: 0; margin-block: var(--space-16); }
+
+/* --- Buttons ------------------------------------------------------------- */
+.btn {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: 12px 22px; border-radius: var(--r-pill);
+  font-weight: var(--fw-semibold); font-size: var(--fs-sm);
+  border: 1px solid transparent; transition: all var(--dur) var(--ease);
+  white-space: nowrap;
+}
+.btn .ico { width: 18px; height: 18px; transition: transform var(--dur) var(--ease); }
+.btn:hover .ico { transform: translateX(3px); }
+.btn-primary { background: var(--gradient-brand); color: #fff; box-shadow: var(--glow-brand); }
+.btn-primary:hover { transform: translateY(-2px); filter: brightness(1.06); }
+.btn-ghost { background: transparent; color: var(--text-1); border-color: var(--border-strong); }
+.btn-ghost:hover { border-color: var(--brand-400); background: rgba(77,124,255,.08); }
+.btn-soft { background: var(--surface-2); color: var(--text-1); border-color: var(--border); }
+.btn-soft:hover { border-color: var(--border-strong); }
+.btn-lg { padding: 15px 30px; font-size: var(--fs-base); }
+.btn-sm { padding: 8px 16px; font-size: var(--fs-xs); }
+
+/* --- Badge / chip / tag -------------------------------------------------- */
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: var(--r-pill);
+  font-size: var(--fs-xs); font-weight: var(--fw-medium); background: var(--surface-2);
+  color: var(--text-2); border: 1px solid var(--border); }
+.badge.brand { color: var(--brand-300); background: rgba(77,124,255,.10); border-color: var(--border-brand); }
+.badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); box-shadow: 0 0 8px var(--success); }
+.tag { font-size: var(--fs-xs); color: var(--text-3); padding: 4px 10px; border-radius: var(--r-sm); background: var(--surface-2); }
+
+/* --- Card ---------------------------------------------------------------- */
+.card {
+  background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--r-lg);
+  padding: var(--space-8); transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  position: relative; overflow: hidden;
+}
+.card:hover { border-color: var(--border-strong); transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.card .card-ico {
+  width: 48px; height: 48px; border-radius: var(--r-md); display: grid; place-items: center;
+  background: var(--gradient-soft); border: 1px solid var(--border-brand); color: var(--brand-300);
+  margin-bottom: var(--space-5);
+}
+.card h3 { margin-bottom: var(--space-3); }
+.card .arrow { margin-top: var(--space-6); color: var(--brand-400); font-weight: var(--fw-semibold); font-size: var(--fs-sm); display: inline-flex; gap: 6px; }
+.card.interactive::after {
+  content: ""; position: absolute; inset: 0; background: var(--gradient-soft); opacity: 0;
+  transition: opacity var(--dur) var(--ease); pointer-events: none;
+}
+.card.interactive:hover::after { opacity: .5; }
+.card > * { position: relative; z-index: 1; }
+
+/* product accent variants */
+.card[data-accent="gpu"] .card-ico   { color:#6E97FF; }
+.card[data-accent="model"] .card-ico { color:#9A6BFF; }
+.card[data-accent="agent"] .card-ico { color:#38E1D6; }
+.card[data-accent="nadia"] .card-ico { color:#35D08A; }
+
+/* --- Metric / stat infographic ------------------------------------------ */
+.metric { padding: var(--space-8) var(--space-6); border-left: 2px solid var(--border-brand); }
+.metric .num { font-family: var(--font-mono); font-size: clamp(2rem,1.4rem+2vw,3rem); font-weight: var(--fw-bold);
+  color: var(--text-1); line-height: 1; letter-spacing: -0.02em; }
+.metric .num .unit { font-size: .5em; color: var(--brand-400); margin-left: 4px; }
+.metric .label { margin-top: var(--space-3); color: var(--text-2); font-size: var(--fs-sm); }
+.metric .sub { color: var(--text-3); font-size: var(--fs-xs); margin-top: 4px; }
+
+/* --- Header / nav -------------------------------------------------------- */
+.site-header {
+  position: sticky; top: 0; z-index: 100; height: var(--header-h);
+  display: flex; align-items: center; backdrop-filter: blur(16px);
+  background: color-mix(in srgb, var(--bg-900) 72%, transparent);
+  border-bottom: 1px solid transparent; transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.site-header.scrolled { border-color: var(--border); }
+.site-header .container { display: flex; align-items: center; justify-content: space-between; gap: var(--space-8); }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: var(--fw-bold); color: var(--text-1); font-size: 1.25rem; letter-spacing: -0.02em; }
+.brand .logo { width: 30px; height: 30px; }
+.nav { display: flex; align-items: center; gap: var(--space-2); }
+.nav a { padding: 8px 14px; border-radius: var(--r-sm); font-size: var(--fs-sm); color: var(--text-2); font-weight: var(--fw-medium); transition: color var(--dur) var(--ease), background var(--dur) var(--ease); }
+.nav a:hover, .nav a[aria-current="page"] { color: var(--text-1); background: var(--surface-2); }
+.header-actions { display: flex; align-items: center; gap: var(--space-3); }
+.theme-toggle, .nav-toggle { width: 40px; height: 40px; border-radius: var(--r-sm); display: grid; place-items: center;
+  background: var(--surface-2); border: 1px solid var(--border); color: var(--text-2); }
+.theme-toggle:hover { color: var(--text-1); }
+.nav-toggle { display: none; }
+.lang { font-size: var(--fs-xs); color: var(--text-3); display: flex; gap: 6px; align-items: center; }
+.lang b { color: var(--text-1); }
+
+/* --- Hero ---------------------------------------------------------------- */
+.hero { position: relative; padding-block: clamp(var(--space-20), 12vh, var(--space-32)) var(--space-24); overflow: hidden; }
+.hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--space-16); align-items: center; }
+.hero h1 { margin-block: var(--space-5); }
+.hero .lead { max-width: 540px; }
+.hero .cta-row { display: flex; gap: var(--space-3); margin-top: var(--space-8); flex-wrap: wrap; }
+.hero-bg { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.hero-bg .glow { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .5; }
+.hero-bg .g1 { width: 520px; height: 520px; background: radial-gradient(circle, rgba(77,124,255,.45), transparent 70%); top: -160px; right: -80px; }
+.hero-bg .g2 { width: 420px; height: 420px; background: radial-gradient(circle, rgba(154,107,255,.30), transparent 70%); bottom: -160px; left: -120px; }
+.grid-overlay { position: absolute; inset: 0; z-index: -1;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px; mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 75%);
+  opacity: .5; }
+
+/* --- Logos / marquee ----------------------------------------------------- */
+.logos { display: flex; flex-wrap: wrap; gap: var(--space-8); align-items: center; justify-content: center; opacity: .75; }
+.logos .logo-chip { font-weight: var(--fw-semibold); color: var(--text-3); font-size: var(--fs-sm); padding: 10px 18px; border: 1px solid var(--border); border-radius: var(--r-sm); }
+
+/* --- Table (IR) ---------------------------------------------------------- */
+.table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+.table th, .table td { text-align: left; padding: var(--space-4) var(--space-5); border-bottom: 1px solid var(--border); }
+.table th { color: var(--text-3); font-weight: var(--fw-medium); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: var(--tracking-wide); }
+.table tr, .table tbody tr { transition: background var(--dur) var(--ease); }
+.table tbody tr:hover { background: var(--surface-1); }
+.table .file { color: var(--brand-400); display: inline-flex; gap: 6px; align-items: center; font-weight: var(--fw-medium); }
+.tabs { display: flex; gap: var(--space-2); border-bottom: 1px solid var(--border); margin-bottom: var(--space-8); flex-wrap: wrap; }
+.tab { padding: 12px 18px; color: var(--text-3); font-weight: var(--fw-medium); font-size: var(--fs-sm); border-bottom: 2px solid transparent; }
+.tab[aria-selected="true"] { color: var(--text-1); border-color: var(--brand-500); }
+
+/* --- Forms --------------------------------------------------------------- */
+.field { display: flex; flex-direction: column; gap: var(--space-2); }
+.field label { font-size: var(--fs-sm); color: var(--text-2); font-weight: var(--fw-medium); }
+.field label .req { color: var(--brand-400); }
+.input, .select, .textarea {
+  width: 100%; padding: 12px 14px; border-radius: var(--r-md); background: var(--surface-1);
+  border: 1px solid var(--border); color: var(--text-1); font: inherit; transition: border-color var(--dur) var(--ease);
+}
+.input:focus, .select:focus, .textarea:focus { border-color: var(--brand-500); outline: none; }
+.textarea { min-height: 140px; resize: vertical; }
+
+/* --- Insight / news cards ------------------------------------------------ */
+.post { display: flex; flex-direction: column; }
+.post .thumb { aspect-ratio: 16/9; border-radius: var(--r-md); background: var(--gradient-soft); border: 1px solid var(--border); margin-bottom: var(--space-5); position: relative; overflow: hidden; }
+.post .thumb .cat { position: absolute; top: 12px; left: 12px; }
+.post .date { color: var(--text-3); font-size: var(--fs-xs); margin-top: var(--space-3); }
+.post h3 { font-size: var(--fs-h4); margin-top: var(--space-2); }
+
+/* --- Footer -------------------------------------------------------------- */
+.site-footer { border-top: 1px solid var(--border); padding-block: var(--space-20) var(--space-10); background: var(--bg-800); }
+.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: var(--space-10); }
+.footer-grid h4 { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--text-3); margin-bottom: var(--space-4); font-weight: var(--fw-semibold); }
+.footer-grid a { color: var(--text-2); font-size: var(--fs-sm); display: block; padding: 5px 0; transition: color var(--dur) var(--ease); }
+.footer-grid a:hover { color: var(--text-1); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: var(--space-6); margin-top: var(--space-16); padding-top: var(--space-8); border-top: 1px solid var(--border); flex-wrap: wrap; }
+.footer-bottom .legal { color: var(--text-3); font-size: var(--fs-xs); }
+.socials { display: flex; gap: var(--space-3); }
+.socials a { width: 38px; height: 38px; border-radius: var(--r-sm); display: grid; place-items: center; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-2); }
+.socials a:hover { color: var(--text-1); border-color: var(--border-strong); }
+
+/* --- CTA band ------------------------------------------------------------ */
+.cta-band { border-radius: var(--r-2xl); padding: var(--space-20); text-align: center; position: relative; overflow: hidden;
+  background: var(--surface-1); border: 1px solid var(--border-brand); }
+.cta-band::before { content:""; position:absolute; inset:0; background: var(--gradient-soft); }
+.cta-band > * { position: relative; }
+.cta-band h2 { margin-bottom: var(--space-4); }
+
+/* --- Scroll reveal ------------------------------------------------------- */
+[data-reveal] { opacity: 0; transform: translateY(20px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+[data-reveal].in { opacity: 1; transform: none; }
+
+/* --- Utilities ----------------------------------------------------------- */
+.center { text-align: center; }
+.mt-4 { margin-top: var(--space-4); } .mt-8 { margin-top: var(--space-8); } .mt-12 { margin-top: var(--space-12); }
+.flex { display: flex; } .items-center { align-items: center; } .gap-3 { gap: var(--space-3); } .gap-6 { gap: var(--space-6); }
+.wrap { flex-wrap: wrap; }
+
+/* --- Responsive ---------------------------------------------------------- */
+@media (max-width: 960px) {
+  .hero-grid { grid-template-columns: 1fr; gap: var(--space-12); }
+  .cols-4 { grid-template-columns: repeat(2,1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--space-8); }
+}
+@media (max-width: 720px) {
+  .nav { display: none; }
+  .nav-toggle { display: grid; }
+  .cols-2, .cols-3, .cols-4 { grid-template-columns: 1fr; }
+  .section { padding-block: var(--space-16); }
+  .cta-band { padding: var(--space-12) var(--space-6); }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+
+/* mobile drawer */
+.drawer { position: fixed; inset: var(--header-h) 0 0; z-index: 90; background: var(--bg-900); padding: var(--space-8);
+  transform: translateY(-12px); opacity: 0; pointer-events: none; transition: all var(--dur) var(--ease); display: none; }
+.drawer.open { opacity: 1; transform: none; pointer-events: auto; }
+.drawer a { display: block; padding: var(--space-4) 0; font-size: var(--fs-lg); color: var(--text-1); border-bottom: 1px solid var(--border); }
+@media (max-width: 720px) { .drawer { display: block; } }
+
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="container wide">
+    <a class="brand" href="index.html"><svg class="logo" viewBox="0 0 32 32" fill="none"><defs><linearGradient id="lg" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#4D7CFF"/><stop offset=".55" stop-color="#9A6BFF"/><stop offset="1" stop-color="#38E1D6"/></linearGradient></defs><path d="M16 3 L27 22 H21 L16 12 L11 22 H5 Z" fill="url(#lg)"/><circle cx="16" cy="26" r="3" fill="#38E1D6"/></svg>ACRYL</a>
+    <nav class="nav" aria-label="주 메뉴">
+      <a href="product-gpubase.html">제품</a><a href="index.html#solutions">솔루션</a>
+      <a href="index.html#insights">인사이트</a><a href="ir.html">IR</a><a href="careers.html" aria-current="page">채용</a>
+    </nav>
+    <div class="header-actions">
+      <span class="lang"><b>KR</b> / EN</span>
+      <button class="theme-toggle" data-action="theme" aria-label="테마 전환"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg></button>
+      <a class="btn btn-primary btn-sm" href="#jobs">지원하기</a>
+      <button class="nav-toggle" data-action="drawer" aria-label="메뉴 열기"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="drawer"><a href="product-gpubase.html" data-action="drawer-link">제품</a><a href="ir.html" data-action="drawer-link">IR</a><a href="#jobs" data-action="drawer-link">채용공고</a></nav>
+
+<main>
+<!-- hero -->
+<section class="hero" style="padding-block:var(--space-24) var(--space-16)">
+  <div class="hero-bg"><span class="glow g1"></span><span class="glow g2"></span></div>
+  <div class="grid-overlay"></div>
+  <div class="container wide center" style="max-width:820px;margin-inline:auto">
+    <div data-reveal>
+      <span class="badge brand"><span class="dot"></span>We're hiring</span>
+      <h1 class="display mt-4">Unlock your <span class="text-gradient">AI Potential</span></h1>
+      <p class="lead mt-4" style="margin-inline:auto">우리의 빛나는 여정에 함께하세요. AI 인프라부터 의료 AI까지,
+        실제 산업을 움직이는 기술을 학생부터 시니어까지 함께 만듭니다.</p>
+      <div class="cta-row" style="justify-content:center;margin-top:var(--space-8)">
+        <a class="btn btn-primary btn-lg" href="#jobs">채용 공고 보기</a>
+        <a class="btn btn-ghost btn-lg" href="#culture">일하는 방식</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- culture / how we work -->
+<section class="section" id="culture">
+  <div class="container wide">
+    <div class="section-head"><span class="eyebrow">How we work</span><h2>아크릴이 일하는 방식</h2></div>
+    <div class="grid cols-3">
+      <div class="card" data-reveal><div class="card-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h18M12 3v18"/></svg></div><h3>수평적 조직문화</h3><p>직급이 아닌 문제로 대화합니다. 누구나 의견을 내고, 더 나은 근거가 결정을 이깁니다.</p></div>
+      <div class="card" data-reveal><div class="card-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div><h3>시차 출퇴근제</h3><p>집중이 잘 되는 시간에 일합니다. 자율과 책임으로 결과를 만듭니다.</p></div>
+      <div class="card" data-reveal><div class="card-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12v9M12 12L4 7.5M12 12l8-4.5"/></svg></div><h3>성장 지원</h3><p>자기개발비·교육·학회 참가를 지원합니다. 검증된 현장에서 빠르게 성장합니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- benefits -->
+<section class="section tight">
+  <div class="container wide">
+    <div class="section-head"><span class="eyebrow">Benefits</span><h2>복지와 지원</h2></div>
+    <div class="grid cols-4">
+      <div class="card" data-reveal><h3 class="h3">근무</h3><p class="muted" style="font-size:var(--fs-sm)">시차 출퇴근 · 수평 문화 · 사내 카페테리아</p></div>
+      <div class="card" data-reveal><h3 class="h3">성장</h3><p class="muted" style="font-size:var(--fs-sm)">자기개발비 · 교육 기회 · 학회/컨퍼런스 지원</p></div>
+      <div class="card" data-reveal><h3 class="h3">건강</h3><p class="muted" style="font-size:var(--fs-sm)">건강검진비 · 야근 시 교통/식대 지원</p></div>
+      <div class="card" data-reveal><h3 class="h3">문화</h3><p class="muted" style="font-size:var(--fs-sm)">동호회 활동 및 활동비 지원 · 팀 빌딩</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- jobs (real AI roles, replacing dummy logistics posting) -->
+<section class="section" id="jobs">
+  <div class="container wide">
+    <div class="section-head"><span class="eyebrow">Open positions</span><h2>채용 중인 직무</h2>
+      <p>모든 직무는 상시 채용이며, 경력/신입 여부는 공고별로 확인해 주세요.</p></div>
+    <div class="stack" data-reveal>
+      <a class="card flex items-center" href="#" style="justify-content:space-between;flex-wrap:wrap;gap:var(--space-4)">
+        <div><span class="badge brand">Engineering</span><h3 class="mt-3" style="font-size:var(--fs-h4)">AI 인프라 엔지니어 (GPU/분산학습)</h3><p class="muted" style="font-size:var(--fs-sm)">정규직 · 경력 · 서울 강남</p></div>
+        <span class="btn btn-soft btn-sm">상세 보기 →</span>
+      </a>
+      <a class="card flex items-center" href="#" style="justify-content:space-between;flex-wrap:wrap;gap:var(--space-4)">
+        <div><span class="badge brand">Engineering</span><h3 class="mt-3" style="font-size:var(--fs-h4)">MLOps / 플랫폼 백엔드 엔지니어</h3><p class="muted" style="font-size:var(--fs-sm)">정규직 · 경력/신입 · 서울 강남</p></div>
+        <span class="btn btn-soft btn-sm">상세 보기 →</span>
+      </a>
+      <a class="card flex items-center" href="#" style="justify-content:space-between;flex-wrap:wrap;gap:var(--space-4)">
+        <div><span class="badge brand">Research</span><h3 class="mt-3" style="font-size:var(--fs-h4)">LLM / 에이전트 리서치 엔지니어</h3><p class="muted" style="font-size:var(--fs-sm)">정규직 · 경력 · 서울 강남</p></div>
+        <span class="btn btn-soft btn-sm">상세 보기 →</span>
+      </a>
+      <a class="card flex items-center" href="#" style="justify-content:space-between;flex-wrap:wrap;gap:var(--space-4)">
+        <div><span class="badge brand">Healthcare AI</span><h3 class="mt-3" style="font-size:var(--fs-h4)">의료 AI 엔지니어 (NADIA, SaMD)</h3><p class="muted" style="font-size:var(--fs-sm)">정규직 · 경력 · 서울 강남</p></div>
+        <span class="btn btn-soft btn-sm">상세 보기 →</span>
+      </a>
+      <a class="card flex items-center" href="#" style="justify-content:space-between;flex-wrap:wrap;gap:var(--space-4)">
+        <div><span class="badge">Internship</span><h3 class="mt-3" style="font-size:var(--fs-h4)">AI 엔지니어링 인턴 (학생 환영)</h3><p class="muted" style="font-size:var(--fs-sm)">인턴 · 신입 · 서울 강남</p></div>
+        <span class="btn btn-soft btn-sm">상세 보기 →</span>
+      </a>
+    </div>
+    <p class="muted mt-8" style="font-size:var(--fs-xs)">※ 본 공고는 디자인 시안용 예시입니다. 실제 채용 직무·자격요건은 운영 CMS(Job 스키마)로 관리·갱신됩니다.</p>
+  </div>
+</section>
+
+<section class="section" id="contact"><div class="container"><div class="cta-band" data-reveal>
+  <h2>찾는 직무가 없으신가요?</h2>
+  <p class="lead">상시 지원도 환영합니다. 당신의 강점을 들려주세요.</p>
+  <div class="cta-row" style="justify-content:center;margin-top:var(--space-8)"><a class="btn btn-primary btn-lg" href="mailto:info@acryl.ai">상시 지원하기</a></div>
+</div></div></section>
+</main>
+
+<footer class="site-footer"><div class="container wide">
+  <div class="footer-bottom" style="margin-top:0;border:0;padding-top:0">
+    <span class="legal">© 2026 ACRYL inc. All rights reserved.</span>
+    <a class="muted" style="font-size:var(--fs-sm)" href="index.html">← 홈으로</a>
+  </div>
+</div></footer>
+<script>
+/* ACRYL Design System — minimal interactions (no dependencies)
+   theme toggle · sticky header · mobile drawer · scroll reveal · count-up */
+(function () {
+  "use strict";
+  var root = document.documentElement;
+
+  /* ---- Theme (persisted) ---- */
+  var saved = localStorage.getItem("acryl-theme");
+  if (saved) root.setAttribute("data-theme", saved);
+  function toggleTheme() {
+    var next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem("acryl-theme", next);
+  }
+
+  /* ---- Sticky header shadow ---- */
+  var header = document.querySelector(".site-header");
+  function onScroll() {
+    if (header) header.classList.toggle("scrolled", window.scrollY > 8);
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---- Mobile drawer ---- */
+  var drawer = document.querySelector(".drawer");
+  function toggleDrawer() { if (drawer) drawer.classList.toggle("open"); }
+
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest("[data-action]");
+    if (!t) return;
+    var a = t.getAttribute("data-action");
+    if (a === "theme") toggleTheme();
+    if (a === "drawer") toggleDrawer();
+    if (a === "drawer-link" && drawer) drawer.classList.remove("open");
+  });
+
+  /* ---- Scroll reveal ---- */
+  var io = "IntersectionObserver" in window
+    ? new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.12 })
+    : null;
+  document.querySelectorAll("[data-reveal]").forEach(function (el, i) {
+    el.style.transitionDelay = (i % 4) * 60 + "ms";
+    if (io) io.observe(el); else el.classList.add("in");
+  });
+
+  /* ---- Count-up for metrics ---- */
+  function countUp(el) {
+    var target = parseFloat(el.getAttribute("data-count"));
+    var dec = (el.getAttribute("data-dec") | 0);
+    var dur = 1100, start = performance.now();
+    function step(now) {
+      var p = Math.min((now - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * eased).toFixed(dec);
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = target.toFixed(dec);
+    }
+    requestAnimationFrame(step);
+  }
+  var counters = document.querySelectorAll("[data-count]");
+  if ("IntersectionObserver" in window && counters.length) {
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { countUp(en.target); cio.unobserve(en.target); }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(function (c) { cio.observe(c); });
+  }
+})();
+
+</script>
+</body>
+</html>
